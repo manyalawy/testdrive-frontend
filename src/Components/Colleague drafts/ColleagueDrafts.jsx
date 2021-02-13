@@ -30,8 +30,8 @@ const columns = [
     minWidth: 170,
   },
   {
-    id: "Phone",
-    label: "Phone",
+    id: "colName",
+    label: "Colleague name",
     minWidth: 170,
   },
   {
@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ClientDrafts() {
+export default function ColleagueDrafts() {
   const token = localStorage.getItem("user");
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
@@ -82,43 +82,36 @@ export default function ClientDrafts() {
   const handleDelete = (id) => {
     setbackdrop(true);
     axios
-      .delete("/client/form/" + id, { headers: { token: token } })
+      .delete("/collegue/form/" + id, { headers: { token: token } })
       .then((res) => {
         if (res.data.message) {
           setopen(true);
           setmessage("Form deleted");
           seterror(false);
           axios
-            .get("/client/draft", { headers: { token: token } })
+            .get("/collegue/draft", { headers: { token: token } })
             .then((res) => {
               setrows(res.data.forms);
             });
         }
-        setbackdrop(false);
       })
       .catch((error) => {
         setopen(true);
         seterror(true);
         setmessage("Error: " + error.response.data.error);
       });
+    setbackdrop(false);
   };
 
   useEffect(() => {
-    axios
-      .get("/client/draft", { headers: { token: token } })
-      .then((res) => {
-        setrows(res.data.forms);
-      })
-      .catch((error) => {
-        setopen(true);
-        seterror(true);
-        setmessage("Error: " + error.response.data.error);
-      });
+    axios.get("/collegue/draft", { headers: { token: token } }).then((res) => {
+      setrows(res.data.forms);
+    });
   }, []);
   return (
     <div>
       <Box m={5}>
-        <h1>Client draft</h1>
+        <h1>Colleague draft</h1>
       </Box>
       <Box mt={4}>
         <Paper className={classes.root}>
@@ -155,7 +148,7 @@ export default function ClientDrafts() {
                             "YYYY/MM/DD hh:mm:ss A"
                           )}
                         </TableCell>
-                        <TableCell>{row.phone}</TableCell>
+                        <TableCell>{row.colName}</TableCell>
                         <TableCell>
                           <Button
                             onClick={() => {

@@ -16,21 +16,21 @@ function NavigationBar() {
           <Nav className="mr-auto">
             <NavDropdown title="Clients" id="basic-nav-dropdown">
               <NavDropdown.Item href="/client/form">Add form</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
+              <NavDropdown.Item href="/client/submission">
                 Submissions
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Draft</NavDropdown.Item>
+              <NavDropdown.Item href="/client/draft">Draft</NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="Colleagues" id="basic-nav-dropdown">
               <NavDropdown.Item href="/colleague/form">
                 Add form
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
+              <NavDropdown.Item href="/colleague/submission">
                 Submissions
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Draft</NavDropdown.Item>
+              <NavDropdown.Item href="/colleague/draft">Draft</NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link href="#home">Settings</Nav.Link>
+            <Nav.Link href="/settings">Settings</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

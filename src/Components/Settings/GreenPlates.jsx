@@ -11,27 +11,23 @@ import TableRow from "@material-ui/core/TableRow";
 import { Box } from "@material-ui/core";
 import axios from "axios";
 import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
 import { Button, Backdrop, CircularProgress } from "@material-ui/core";
-import moment from "moment";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 const columns = [
-  { id: "greenPlate", label: "Green Plate", minWidth: 170 },
-  { id: "carPlate", label: "Original car plate", minWidth: 170 },
   {
-    id: "startDate",
-    label: "Start date",
-    minWidth: 170,
-  },
-  {
-    id: "Phone",
-    label: "Phone",
+    id: "greenPlate",
+    label: "Green plate",
     minWidth: 170,
   },
   {
@@ -43,7 +39,12 @@ const columns = [
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "100%",
+    [theme.breakpoints.down("sm")]: {
+      width: "90%",
+    },
+    [theme.breakpoints.up("sm")]: {
+      width: "40%",
+    },
   },
   container: {
     maxHeight: 440,
@@ -60,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ClientDrafts() {
+export default function GreenPlates() {
   const token = localStorage.getItem("user");
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
@@ -70,6 +71,8 @@ export default function ClientDrafts() {
   const [message, setmessage] = useState("");
   const [error, seterror] = useState(false);
   const [backdrop, setbackdrop] = useState(false);
+  const [dialog, setdialog] = useState(false);
+  const [plate, setplate] = useState("");
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -79,48 +82,78 @@ export default function ClientDrafts() {
     setPage(0);
   };
 
-  const handleDelete = (id) => {
-    setbackdrop(true);
+  const handleAdd = () => {
+    setdialog(false);
+    console.log(plate);
     axios
-      .delete("/client/form/" + id, { headers: { token: token } })
+      .post("/greenPlate", { number: plate }, { headers: { token: token } })
       .then((res) => {
-        if (res.data.message) {
+        setplate("");
+        if (res.data.success) {
           setopen(true);
-          setmessage("Form deleted");
+          setmessage("Plate added");
           seterror(false);
           axios
-            .get("/client/draft", { headers: { token: token } })
+            .get("/greenPlate", { headers: { token: token } })
             .then((res) => {
-              setrows(res.data.forms);
+              setrows(res.data.plates);
             });
         }
-        setbackdrop(false);
       })
       .catch((error) => {
+        setplate("");
         setopen(true);
         seterror(true);
         setmessage("Error: " + error.response.data.error);
       });
   };
 
-  useEffect(() => {
+  const handleDelete = (id) => {
+    setbackdrop(true);
     axios
-      .get("/client/draft", { headers: { token: token } })
+      .delete("/greenPlate/" + id, { headers: { token: token } })
       .then((res) => {
-        setrows(res.data.forms);
+        if (res.data.success) {
+          setopen(true);
+          setmessage("Plate deleted");
+          seterror(false);
+          axios
+            .get("/greenPlate", { headers: { token: token } })
+            .then((res) => {
+              setrows(res.data.plates);
+            });
+        }
       })
       .catch((error) => {
         setopen(true);
         seterror(true);
         setmessage("Error: " + error.response.data.error);
       });
+    setbackdrop(false);
+  };
+
+  useEffect(() => {
+    axios.get("/greenPlate", { headers: { token: token } }).then((res) => {
+      setrows(res.data.plates);
+    });
   }, []);
   return (
     <div>
       <Box m={5}>
-        <h1>Client draft</h1>
+        <h1>Green plates</h1>
       </Box>
-      <Box mt={4}>
+      <Box mt={5} mr={3} display="flex" justifyContent="flex-end">
+        <Button
+          onClick={() => {
+            setdialog(true);
+          }}
+          variant="contained"
+          color="primary"
+        >
+          Add Plate
+        </Button>
+      </Box>
+      <Box mt={5} mb={10} display="flex" justifyContent="center">
         <Paper className={classes.root}>
           <TableContainer className={classes.container}>
             <Table stickyHeader aria-label="sticky table">
@@ -148,14 +181,7 @@ export default function ClientDrafts() {
                         role="checkbox"
                         tabIndex={-1}
                       >
-                        <TableCell>{row.greenPlate}</TableCell>
-                        <TableCell>{row.licensePlate}</TableCell>
-                        <TableCell>
-                          {moment(row.startDate).format(
-                            "YYYY/MM/DD hh:mm:ss A"
-                          )}
-                        </TableCell>
-                        <TableCell>{row.phone}</TableCell>
+                        <TableCell>{row.number}</TableCell>
                         <TableCell>
                           <Button
                             onClick={() => {
@@ -163,9 +189,6 @@ export default function ClientDrafts() {
                             }}
                           >
                             <DeleteIcon />
-                          </Button>
-                          <Button>
-                            <EditIcon />
                           </Button>
                         </TableCell>
                       </TableRow>
@@ -184,28 +207,65 @@ export default function ClientDrafts() {
             onChangeRowsPerPage={handleChangeRowsPerPage}
           />
         </Paper>
-        <div className={classes.alert}>
-          <Snackbar
-            open={open}
-            autoHideDuration={10000}
+      </Box>
+      <div className={classes.alert}>
+        <Snackbar
+          open={open}
+          autoHideDuration={10000}
+          onClose={() => {
+            setopen(false);
+          }}
+        >
+          <Alert
             onClose={() => {
               setopen(false);
             }}
+            severity={error ? "error" : "success"}
           >
-            <Alert
-              onClose={() => {
-                setopen(false);
-              }}
-              severity={error ? "error" : "success"}
-            >
-              {message}
-            </Alert>
-          </Snackbar>
-        </div>
-      </Box>
+            {message}
+          </Alert>
+        </Snackbar>
+      </div>
+
       <Backdrop className={classes.backdrop} open={backdrop}>
         <CircularProgress color="inherit" />
       </Backdrop>
+
+      <Dialog
+        open={dialog}
+        onClose={() => {
+          setdialog(false);
+        }}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">Add plate</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Name"
+            fullWidth
+            value={plate}
+            onChange={(e) => {
+              setplate(e.target.value);
+            }}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => {
+              setdialog(false);
+            }}
+            color="primary"
+          >
+            Cancel
+          </Button>
+          <Button onClick={handleAdd} color="primary">
+            Add
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

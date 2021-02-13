@@ -120,7 +120,7 @@ function ClientForm() {
       signature: signPad.current.toDataURL(),
       frontImage: frontimage,
       backImage: backimage,
-      submissionDate: Moment().format("yyyy-MM-DDThh:mm"),
+      submissionDate: Moment().format("yyyy-MM-DDTHH:mm"),
     };
     setloading(true);
     axios
@@ -233,6 +233,7 @@ function ClientForm() {
           <Box mt={5}>
             <InputLabel>Front image</InputLabel>
             <input
+              accept=".jpg,.jpeg,.png"
               type="file"
               id="front"
               name="filename"

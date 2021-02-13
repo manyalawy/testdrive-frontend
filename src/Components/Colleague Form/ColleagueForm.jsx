@@ -40,9 +40,9 @@ function ColleagueForm() {
   const [plateCheck, setplateCheck] = useState("");
 
   const [startDate, setstartDate] = useState(
-    Moment().format("yyyy-MM-DDThh:mm")
+    Moment().format("yyyy-MM-DDTHH:mm")
   );
-  const [returnDate, setreturnDate] = useState();
+  const [returnDate, setreturnDate] = useState("");
   const [loading, setloading] = useState(false);
   const [colleague, setcolleague] = useState([]);
   const [selectedcol, setselectedcol] = useState("");
@@ -72,11 +72,13 @@ function ColleagueForm() {
     const data = {
       greenPlate: selectedGreenPlate,
       licensePlate: carplate,
-      returnDate: returnDate,
       startDate: startDate,
       status: "draft",
       colName: selectedcol,
     };
+    if (returnDate !== "") {
+      data.returnDate = returnDate;
+    }
     setloading(true);
     axios
       .post("/collegue/form", data, { headers: { token: token } })
@@ -104,7 +106,7 @@ function ColleagueForm() {
       returnDate: returnDate,
       startDate: startDate,
       status: "submitted",
-      submissionDate: Moment().format("yyyy-MM-DDThh:mm"),
+      submissionDate: Moment().format("yyyy-MM-DDTHH:mm"),
     };
     setloading(true);
     axios

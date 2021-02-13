@@ -11,8 +11,13 @@ import TableRow from "@material-ui/core/TableRow";
 import { Box } from "@material-ui/core";
 import axios from "axios";
 import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
-import { Button, Backdrop, CircularProgress } from "@material-ui/core";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import {
+  Button,
+  Backdrop,
+  CircularProgress,
+  TextField,
+} from "@material-ui/core";
 import moment from "moment";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -30,8 +35,8 @@ const columns = [
     minWidth: 170,
   },
   {
-    id: "Phone",
-    label: "Phone",
+    id: "returnDate",
+    label: "Return Date",
     minWidth: 170,
   },
   {
@@ -70,6 +75,9 @@ export default function ClientDrafts() {
   const [message, setmessage] = useState("");
   const [error, seterror] = useState(false);
   const [backdrop, setbackdrop] = useState(false);
+  const [allData, setallData] = useState([]);
+  const [search, setSeaarch] = useState(moment().format("yyyy-MM-DDTHH:mm"));
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -88,26 +96,43 @@ export default function ClientDrafts() {
           setopen(true);
           setmessage("Form deleted");
           seterror(false);
+          setbackdrop(false);
           axios
-            .get("/client/draft", { headers: { token: token } })
+            .get("/client/submission", { headers: { token: token } })
             .then((res) => {
               setrows(res.data.forms);
+              setallData(res.data.forms);
             });
         }
-        setbackdrop(false);
       })
       .catch((error) => {
         setopen(true);
         seterror(true);
         setmessage("Error: " + error.response.data.error);
+        setbackdrop(false);
       });
+  };
+
+  const handleSearch = () => {
+    const newArr = [];
+    allData.map((form) => {
+      const startDate = moment(form.startDate);
+      const returnDate = moment(form.returnDate);
+      const searchDate = moment(search);
+
+      if (searchDate.isBetween(startDate, returnDate)) {
+        newArr.push(form);
+      }
+      setrows(newArr);
+    });
   };
 
   useEffect(() => {
     axios
-      .get("/client/draft", { headers: { token: token } })
+      .get("/client/submission", { headers: { token: token } })
       .then((res) => {
         setrows(res.data.forms);
+        setallData(res.data.forms);
       })
       .catch((error) => {
         setopen(true);
@@ -118,7 +143,37 @@ export default function ClientDrafts() {
   return (
     <div>
       <Box m={5}>
-        <h1>Client draft</h1>
+        <h1>Client Submissions</h1>
+      </Box>
+      <Box display="flex" justifyContent="flex-end" mt={2}>
+        <TextField
+          style={{ marginRight: 10 }}
+          id="standard-basic"
+          label="Enter date"
+          type="datetime-local"
+          value={search}
+          onChange={(e) => {
+            setSeaarch(moment(e.target.value).format("yyyy-MM-DDTHH:mm"));
+          }}
+        />
+        <Button
+          size="small"
+          variant="contained"
+          style={{ marginRight: 10, marginLeft: 10 }}
+          onClick={handleSearch}
+        >
+          Search
+        </Button>
+        <Button
+          style={{ backgroundColor: "red", color: "white" }}
+          size="small"
+          variant="contained"
+          onClick={() => {
+            setrows(allData);
+          }}
+        >
+          Reset
+        </Button>
       </Box>
       <Box mt={4}>
         <Paper className={classes.root}>
@@ -155,7 +210,11 @@ export default function ClientDrafts() {
                             "YYYY/MM/DD hh:mm:ss A"
                           )}
                         </TableCell>
-                        <TableCell>{row.phone}</TableCell>
+                        <TableCell>
+                          {moment(row.returnDate).format(
+                            "YYYY/MM/DD hh:mm:ss A"
+                          )}
+                        </TableCell>
                         <TableCell>
                           <Button
                             onClick={() => {
@@ -165,7 +224,7 @@ export default function ClientDrafts() {
                             <DeleteIcon />
                           </Button>
                           <Button>
-                            <EditIcon />
+                            <VisibilityIcon />
                           </Button>
                         </TableCell>
                       </TableRow>

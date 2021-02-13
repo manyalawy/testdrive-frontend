@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CustomizedSnackbars(props) {
+  console.log(props);
   const classes = useStyles();
   const [open, setopen] = useState(props.open);
   const handleClose = (event, reason) => {
