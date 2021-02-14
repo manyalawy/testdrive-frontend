@@ -36,10 +36,9 @@ function ClientForm() {
   const [open, setopen] = useState(false);
   const [message, setmessage] = useState("");
   const [error, seterror] = useState(false);
-  const [selectedGreenPlate, setselectedGreenPlate] = useState("");
+  const [selectedGreenPlate, setselectedGreenPlate] = useState("None");
   const [carplate, setcarplate] = useState("");
   const [plateCheck, setplateCheck] = useState("");
-  const date = new Date();
   const [startDate, setstartDate] = useState(
     Moment().format("yyyy-MM-DDThh:mm")
   );
@@ -176,9 +175,7 @@ function ClientForm() {
                 setselectedGreenPlate(e.target.value);
               }}
             >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
+              <MenuItem value="None">None</MenuItem>
               {greenPlates.map((plate) => {
                 return (
                   <MenuItem key={plate._id} value={plate.number}>

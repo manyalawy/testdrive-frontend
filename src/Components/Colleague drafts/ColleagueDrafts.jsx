@@ -157,7 +157,7 @@ export default function ColleagueDrafts() {
                           >
                             <DeleteIcon />
                           </Button>
-                          <Button>
+                          <Button href={"/colleague/form/update/" + row._id}>
                             <EditIcon />
                           </Button>
                         </TableCell>

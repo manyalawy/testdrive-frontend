@@ -223,7 +223,7 @@ export default function ClientDrafts() {
                           >
                             <DeleteIcon />
                           </Button>
-                          <Button>
+                          <Button href={"/client/form/view/" + row._id}>
                             <VisibilityIcon />
                           </Button>
                         </TableCell>

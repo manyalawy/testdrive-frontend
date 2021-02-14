@@ -110,6 +110,7 @@ export default function ClientDrafts() {
         setrows(res.data.forms);
       })
       .catch((error) => {
+        console.log(error);
         setopen(true);
         seterror(true);
         setmessage("Error: " + error.response.data.error);
@@ -164,7 +165,7 @@ export default function ClientDrafts() {
                           >
                             <DeleteIcon />
                           </Button>
-                          <Button>
+                          <Button href={"/client/form/update/" + row._id}>
                             <EditIcon />
                           </Button>
                         </TableCell>

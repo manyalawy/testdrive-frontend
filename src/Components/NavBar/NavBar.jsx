@@ -1,7 +1,14 @@
-import { Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Nav, Navbar, NavDropdown, Button } from "react-bootstrap";
 import Alert from "../SnackBars/Alert";
+import React from "react";
+import { useHistory } from "react-router-dom";
 
 function NavigationBar() {
+  const history = useHistory();
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    history.push("/login");
+  };
   return (
     <div>
       <Navbar
@@ -31,6 +38,13 @@ function NavigationBar() {
               <NavDropdown.Item href="/colleague/draft">Draft</NavDropdown.Item>
             </NavDropdown>
             <Nav.Link href="/settings">Settings</Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link>
+              <Button onClick={handleLogout} variant="danger">
+                Logout
+              </Button>
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
