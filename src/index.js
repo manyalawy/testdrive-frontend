@@ -15,6 +15,9 @@ import ViewClientForm from "./Components/View Client Form/ViewClientForm";
 import UpdateColleagueForm from "./Components/Update colleague form/UpdateColleagueFrom";
 import Login from "./Components/Login/Login";
 import ProtectedRoute from "./Sevices/ProtectedRoute";
+import axios from "axios";
+
+axios.defaults.baseURL = "https://www.xlback.nl";
 
 ReactDOM.render(
   <>
