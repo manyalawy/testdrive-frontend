@@ -44,7 +44,10 @@ export default function Login() {
       return;
     }
     axios
-      .post("/login", { username: username, password: password })
+      .post("https://www.xlback.nl/login", {
+        username: username,
+        password: password,
+      })
       .then((res) => {
         console.log(res);
         if (res.data.token) {
