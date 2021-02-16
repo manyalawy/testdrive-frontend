@@ -12,6 +12,11 @@ import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
 import Moment from "moment";
 import SignatureCanvas from "react-signature-canvas";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useTheme } from "@material-ui/core/styles";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -31,10 +36,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ClientForm() {
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const classes = useStyles();
   const token = localStorage.getItem("user");
   const [greenPlates, setgreenPlates] = useState([]);
   const [open, setopen] = useState(false);
+  const [dialog, setdialog] = useState(false);
   const [message, setmessage] = useState("");
   const [error, seterror] = useState(false);
   const [selectedGreenPlate, setselectedGreenPlate] = useState("None");
@@ -50,6 +58,7 @@ function ClientForm() {
   const [zipcode, setzipcode] = useState("");
   const [returnDate, setreturnDate] = useState("");
   const [loading, setloading] = useState(false);
+  const [signature, setsignature] = useState("");
 
   let signPad = useRef({});
 
@@ -93,7 +102,7 @@ function ClientForm() {
       phone: phone,
       postal_code: zipcode,
       address: address,
-      signature: signPad.current.toDataURL(),
+      signature: signature,
     };
     if (returnDate !== "") {
       data.returnDate = returnDate;
@@ -164,7 +173,7 @@ function ClientForm() {
       phone: phone,
       postal_code: zipcode,
       address: address,
-      signature: signPad.current.toDataURL(),
+      signature: signature,
       returnDate: returnDate,
     };
 
@@ -357,23 +366,13 @@ function ClientForm() {
             ></TextField>
           </Box>
           <Box mt={5}>
-            <InputLabel>Signature</InputLabel>
-            <div
-              style={{ backgroundColor: "#f5f5f5", width: 250, height: 250 }}
+            <Button
+              onClick={() => {
+                setdialog(true);
+              }}
             >
-              <SignatureCanvas
-                ref={signPad}
-                penColor="black"
-                canvasProps={{
-                  width: 250,
-                  height: 250,
-                  className: "sigCanvas",
-                }}
-              />
-            </div>
-          </Box>
-          <Box mt={2}>
-            <Button onClick={clearSig}>Clear</Button>
+              Open Signature
+            </Button>
           </Box>
           <Box mt={5}>
             <TextField
@@ -411,6 +410,43 @@ function ClientForm() {
       <Backdrop className={classes.backdrop} open={loading}>
         <CircularProgress color="inherit" />
       </Backdrop>
+      <Dialog
+        fullScreen={fullScreen}
+        open={dialog}
+        onClose={handleClose}
+        aria-labelledby="responsive-dialog-title"
+      >
+        <DialogContent>
+          <InputLabel>Signature</InputLabel>
+          <div style={{ backgroundColor: "#f5f5f5", width: 300, height: 300 }}>
+            <SignatureCanvas
+              ref={signPad}
+              penColor="black"
+              canvasProps={{
+                width: 300,
+                height: 300,
+                className: "sigCanvas",
+              }}
+            />
+          </div>
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={clearSig} color="primary">
+            Clear
+          </Button>
+          <Button
+            onClick={() => {
+              const x = signPad.current.toDataURL();
+              setsignature(x);
+              setdialog(false);
+            }}
+            color="primary"
+            autoFocus
+          >
+            Save
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
