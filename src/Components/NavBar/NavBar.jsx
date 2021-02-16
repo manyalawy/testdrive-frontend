@@ -1,5 +1,4 @@
 import { Nav, Navbar, NavDropdown, Button } from "react-bootstrap";
-import Alert from "../SnackBars/Alert";
 import React from "react";
 import { useHistory } from "react-router-dom";
 
@@ -10,14 +9,8 @@ function NavigationBar() {
     history.push("/login");
   };
   return (
-    <div style={{ fontSize: 20 }}>
-      <Navbar
-        style={{ margin: 0, border: 0, width: "100%" }}
-        bg="dark"
-        variant="dark"
-        expand="lg"
-      >
-        <Navbar.Brand>XLPROEF</Navbar.Brand>
+    <div style={{ fontSize: 20, marginRight: -90 }}>
+      <Navbar bg="dark" variant="dark" expand="lg">
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
@@ -37,14 +30,10 @@ function NavigationBar() {
               </NavDropdown.Item>
               <NavDropdown.Item href="/colleague/draft">Draft</NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link href="/settings">Settings</Nav.Link>
-          </Nav>
-          <Nav>
-            <Nav.Link>
-              <Button onClick={handleLogout} variant="danger">
-                Logout
-              </Button>
-            </Nav.Link>
+            <NavDropdown title="Settings" id="basic-nav-dropdown">
+              <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
+              <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+            </NavDropdown>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

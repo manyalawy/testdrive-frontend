@@ -241,7 +241,7 @@ function ClientForm() {
   }, []);
 
   return (
-    <div>
+    <div style={{ width: "100%" }}>
       <Box m={3}>
         <h1>Client Form</h1>
         <Box
@@ -439,6 +439,9 @@ function ClientForm() {
               const x = signPad.current.toDataURL();
               setsignature(x);
               setdialog(false);
+              setmessage("Signature Saved");
+              setopen(true);
+              seterror(false);
             }}
             color="primary"
             autoFocus
