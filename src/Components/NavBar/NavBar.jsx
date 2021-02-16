@@ -10,9 +10,9 @@ function NavigationBar() {
     history.push("/login");
   };
   return (
-    <div>
+    <div style={{ fontSize: 20 }}>
       <Navbar
-        style={{ margin: 0, border: 0 }}
+        style={{ margin: 0, border: 0, width: "100%" }}
         bg="dark"
         variant="dark"
         expand="lg"

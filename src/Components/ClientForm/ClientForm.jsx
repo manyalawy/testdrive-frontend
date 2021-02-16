@@ -12,6 +12,7 @@ import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
 import Moment from "moment";
 import SignatureCanvas from "react-signature-canvas";
+
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -40,14 +41,14 @@ function ClientForm() {
   const [carplate, setcarplate] = useState("");
   const [plateCheck, setplateCheck] = useState("");
   const [startDate, setstartDate] = useState(
-    Moment().format("yyyy-MM-DDThh:mm")
+    Moment().format("yyyy-MM-DDTHH:mm")
   );
   const [frontimage, setfrontimage] = useState("");
   const [backimage, setbackimage] = useState("");
   const [phone, setphone] = useState("");
   const [address, setaddress] = useState("");
   const [zipcode, setzipcode] = useState("");
-  const [returnDate, setreturnDate] = useState();
+  const [returnDate, setreturnDate] = useState("");
   const [loading, setloading] = useState(false);
 
   let signPad = useRef({});
@@ -57,6 +58,10 @@ function ClientForm() {
     if (reason === "clickaway") {
       return;
     }
+  };
+
+  const clearSig = () => {
+    signPad.current.clear();
   };
 
   const checkCarPlate = (e) => {
@@ -73,25 +78,63 @@ function ClientForm() {
     });
   };
 
-  const saveAsDraft = () => {
+  const saveAsDraft = async () => {
+    if (!frontimage || !backimage) {
+      setopen(true);
+      setmessage("Please add images");
+      seterror(true);
+      return;
+    }
     const data = {
       greenPlate: selectedGreenPlate,
       licensePlate: carplate,
-      returnDate: returnDate,
       startDate: startDate,
       status: "draft",
       phone: phone,
       postal_code: zipcode,
       address: address,
       signature: signPad.current.toDataURL(),
-      frontImage: frontimage,
-      backImage: backimage,
     };
+    if (returnDate !== "") {
+      data.returnDate = returnDate;
+    }
+
+    const front = new FormData();
+    front.append("upload_preset", "xlproef");
+    front.append("file", frontimage);
     setloading(true);
-    axios
+    try {
+      const first = await axios.post(
+        "https://api.cloudinary.com/v1_1/viral-online-commerce/image/upload",
+        front
+      );
+
+      data.frontImageURL = first.data.url;
+      data.frontImageID = first.data.public_id;
+
+      const back = new FormData();
+      back.append("upload_preset", "xlproef");
+      back.append("file", backimage);
+      const sec = await axios.post(
+        "https://api.cloudinary.com/v1_1/viral-online-commerce/image/upload",
+        back
+      );
+      data.backImageURL = sec.data.url;
+      data.backImageID = sec.data.public_id;
+    } catch (error) {
+      setopen(true);
+      seterror(true);
+      if (error.response.data.error) {
+        setmessage("Error: " + error.response.data.error);
+      } else {
+        setmessage("Error");
+        console.log(error);
+      }
+    }
+
+    await axios
       .post("/client/form", data, { headers: { token: token } })
       .then((res) => {
-        setloading(false);
         if (res.data.success == true) {
           setopen(true);
           seterror(false);
@@ -99,45 +142,80 @@ function ClientForm() {
         }
       })
       .catch((error) => {
-        setloading(false);
         setopen(true);
         seterror(true);
         setmessage("Error: " + error.response.data.error);
       });
+    setloading(false);
   };
 
-  const submit = () => {
+  const submit = async () => {
+    if (!frontimage || !backimage) {
+      setopen(true);
+      setmessage("Please add images");
+      seterror(true);
+      return;
+    }
     const data = {
       greenPlate: selectedGreenPlate,
       licensePlate: carplate,
-      returnDate: returnDate,
       startDate: startDate,
       status: "submitted",
       phone: phone,
       postal_code: zipcode,
       address: address,
       signature: signPad.current.toDataURL(),
-      frontImage: frontimage,
-      backImage: backimage,
-      submissionDate: Moment().format("yyyy-MM-DDTHH:mm"),
+      returnDate: returnDate,
     };
+
+    const front = new FormData();
+    front.append("upload_preset", "xlproef");
+    front.append("file", frontimage);
     setloading(true);
-    axios
+    try {
+      const first = await axios.post(
+        "https://api.cloudinary.com/v1_1/viral-online-commerce/image/upload",
+        front
+      );
+
+      data.frontImageURL = first.data.url;
+      data.frontImageID = first.data.public_id;
+
+      const back = new FormData();
+      back.append("upload_preset", "xlproef");
+      back.append("file", backimage);
+      const sec = await axios.post(
+        "https://api.cloudinary.com/v1_1/viral-online-commerce/image/upload",
+        back
+      );
+      data.backImageURL = sec.data.url;
+      data.backImageID = sec.data.public_id;
+    } catch (error) {
+      setopen(true);
+      seterror(true);
+      if (error.response.data.error) {
+        setmessage("Error: " + error.response.data.error);
+      } else {
+        setmessage("Error");
+        console.log(error);
+      }
+    }
+
+    await axios
       .post("/client/form", data, { headers: { token: token } })
       .then((res) => {
-        setloading(false);
         if (res.data.success == true) {
           setopen(true);
           seterror(false);
-          setmessage("Form submitted");
+          setmessage("Form saved to drafts");
         }
       })
       .catch((error) => {
-        setloading(false);
         setopen(true);
         seterror(true);
         setmessage("Error: " + error.response.data.error);
       });
+    setloading(false);
   };
 
   useEffect(() => {
@@ -235,9 +313,7 @@ function ClientForm() {
               id="front"
               name="filename"
               onChange={(e) => {
-                getBase64(e.target.files[0], (res) => {
-                  setfrontimage(res);
-                });
+                setfrontimage(e.target.files[0]);
               }}
             ></input>
           </Box>
@@ -249,9 +325,7 @@ function ClientForm() {
               id="back"
               name="filename"
               onChange={(e) => {
-                getBase64(e.target.files[0], (res) => {
-                  setbackimage(res);
-                });
+                setbackimage(e.target.files[0]);
               }}
             ></input>
           </Box>
@@ -297,6 +371,9 @@ function ClientForm() {
                 }}
               />
             </div>
+          </Box>
+          <Box mt={2}>
+            <Button onClick={clearSig}>Clear</Button>
           </Box>
           <Box mt={5}>
             <TextField
