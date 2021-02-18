@@ -72,7 +72,7 @@ export default function Login() {
         </Box>
         <Box mt={5} justifyContent="center" display="flex">
           <TextField
-            label="Usernme"
+            label="Gebruikersnaam"
             value={username}
             onChange={(e) => {
               setusername(e.target.value);
@@ -85,7 +85,7 @@ export default function Login() {
             onChange={(e) => {
               setpassword(e.target.value);
             }}
-            label="Password"
+            label="Wachtwoord"
             type="password"
           />
         </Box>

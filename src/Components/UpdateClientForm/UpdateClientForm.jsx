@@ -88,7 +88,7 @@ function UpdateClientForm() {
   return (
     <div>
       <Box m={3}>
-        <h1>Client Form</h1>
+        <h1>Klanten Form</h1>
         <Box
           mt={10}
           ml={4}
@@ -97,49 +97,49 @@ function UpdateClientForm() {
           flexDirection="column"
         >
           <Typography variant="h5">
-            {"Green plate: " + data.greenPlate}
+            {"Kenteken groenplat: " + data.greenPlate}
           </Typography>
           <Box mt={5}>
             <Typography variant="h5">
-              {"Car license: " + data.licensePlate}
+              {"Kenteken auto: " + data.licensePlate}
             </Typography>
           </Box>
 
           <Box mt={5}>
             <Typography variant="h5">
-              {"Start date: " +
-                Moment(data.startDate).format("DD/MM/YYYY hh:mm:ss A")}
+              {"Begin datum: " +
+                Moment(data.startDate).format("DD/MM/YYYY HH:mm:ss")}
             </Typography>
           </Box>
           <Box mt={5}>
             <Link target="_blank" href={data.frontImageURL}>
-              Front Image
+              Voorste afbeelding
             </Link>
           </Box>
           <Box mt={5}>
             <Link target="_blank" href={data.backImageURL}>
-              Back Image
+              Terug afbeelding
             </Link>
           </Box>
           <Box mt={5}>
-            <Typography variant="h5">{"Phone: " + data.phone}</Typography>
+            <Typography variant="h5">{"Telefoon: " + data.phone}</Typography>
           </Box>
           <Box mt={5}>
-            <Typography variant="h5">{"Address: " + data.address}</Typography>
+            <Typography variant="h5">{"Adres: " + data.address}</Typography>
           </Box>
           <Box mt={5}>
             <Typography variant="h5">
-              {"Postal code: " + data.postal_code}
+              {"Postcode: " + data.postal_code}
             </Typography>
           </Box>
           <Box mt={5}>
-            <InputLabel>Signature</InputLabel>
+            <InputLabel>Handtekening</InputLabel>
             <img src={data.signature} />
           </Box>
           <Box mt={5}>
             <TextField
               id="datetime-local"
-              label="Return date"
+              label="Retourdatum"
               type="datetime-local"
               style={{ width: 200 }}
               className={classes.textField}

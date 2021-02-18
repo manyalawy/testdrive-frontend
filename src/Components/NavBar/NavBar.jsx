@@ -9,19 +9,19 @@ function NavigationBar() {
     history.push("/login");
   };
   return (
-    <div style={{ fontSize: 20, marginRight: -90 }}>
+    <div style={{ fontSize: 30, marginRight: -90 }}>
       <Navbar bg="dark" variant="dark" expand="lg">
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <NavDropdown title="Clients" id="basic-nav-dropdown">
+            <NavDropdown title="Klanten" id="basic-nav-dropdown">
               <NavDropdown.Item href="/client/form">Add form</NavDropdown.Item>
               <NavDropdown.Item href="/client/submission">
                 Submissions
               </NavDropdown.Item>
               <NavDropdown.Item href="/client/draft">Draft</NavDropdown.Item>
             </NavDropdown>
-            <NavDropdown title="Colleagues" id="basic-nav-dropdown">
+            <NavDropdown title="Medewerker" id="basic-nav-dropdown">
               <NavDropdown.Item href="/colleague/form">
                 Add form
               </NavDropdown.Item>
@@ -30,8 +30,8 @@ function NavigationBar() {
               </NavDropdown.Item>
               <NavDropdown.Item href="/colleague/draft">Draft</NavDropdown.Item>
             </NavDropdown>
-            <NavDropdown title="Settings" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
+            <NavDropdown title="Instellingen" id="basic-nav-dropdown">
+              <NavDropdown.Item href="/settings">Instellingen</NavDropdown.Item>
               <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
             </NavDropdown>
           </Nav>

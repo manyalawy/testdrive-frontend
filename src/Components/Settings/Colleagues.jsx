@@ -28,12 +28,12 @@ function Alert(props) {
 const columns = [
   {
     id: "colName",
-    label: "Colleague name",
+    label: "Medewerker",
     minWidth: 170,
   },
   {
     id: "options",
-    label: "Options",
+    label: "Opties",
     minWidth: 170,
   },
 ];
@@ -91,7 +91,7 @@ export default function Colleagues() {
         setname("");
         if (res.data.success) {
           setopen(true);
-          setmessage("Colleague added");
+          setmessage("Medewerker added");
           seterror(false);
           axios.get("/collegue", { headers: { token: token } }).then((res) => {
             setrows(res.data.colleagues);
@@ -113,7 +113,7 @@ export default function Colleagues() {
       .then((res) => {
         if (res.data.success) {
           setopen(true);
-          setmessage("Colleague deleted");
+          setmessage("Medewerker deleted");
           seterror(false);
           axios.get("/collegue", { headers: { token: token } }).then((res) => {
             setrows(res.data.colleagues);
@@ -136,7 +136,7 @@ export default function Colleagues() {
   return (
     <div>
       <Box m={5}>
-        <h1>Colleagues</h1>
+        <h1>Medewerker</h1>
       </Box>
       <Box mt={5} mr={3} display="flex" justifyContent="flex-end">
         <Button
@@ -146,7 +146,7 @@ export default function Colleagues() {
           variant="contained"
           color="primary"
         >
-          Add Colleague
+          Medewerker toevoegen
         </Button>
       </Box>
       <Box mt={4} display="flex" justifyContent="center">

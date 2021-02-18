@@ -27,12 +27,12 @@ function Alert(props) {
 const columns = [
   {
     id: "greenPlate",
-    label: "Green plate",
+    label: "Kenteken groenplat",
     minWidth: 170,
   },
   {
     id: "options",
-    label: "Options",
+    label: "Optiess",
     minWidth: 170,
   },
 ];
@@ -91,7 +91,7 @@ export default function GreenPlates() {
         setplate("");
         if (res.data.success) {
           setopen(true);
-          setmessage("Plate added");
+          setmessage("Kenteken groenplat added");
           seterror(false);
           axios
             .get("/greenPlate", { headers: { token: token } })
@@ -115,7 +115,7 @@ export default function GreenPlates() {
       .then((res) => {
         if (res.data.success) {
           setopen(true);
-          setmessage("Plate deleted");
+          setmessage("Kenteken groenplat deleted");
           seterror(false);
           axios
             .get("/greenPlate", { headers: { token: token } })
@@ -140,7 +140,7 @@ export default function GreenPlates() {
   return (
     <div>
       <Box m={5}>
-        <h1>Green plates</h1>
+        <h1>Kenteken groenplat</h1>
       </Box>
       <Box mt={5} mr={3} display="flex" justifyContent="flex-end">
         <Button
@@ -150,7 +150,7 @@ export default function GreenPlates() {
           variant="contained"
           color="primary"
         >
-          Add Plate
+          Kenteken groenplat toevoegen
         </Button>
       </Box>
       <Box mt={5} mb={10} display="flex" justifyContent="center">

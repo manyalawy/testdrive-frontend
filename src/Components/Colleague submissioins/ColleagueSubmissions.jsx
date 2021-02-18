@@ -27,26 +27,26 @@ function Alert(props) {
 }
 
 const columns = [
-  { id: "greenPlate", label: "Green Plate", minWidth: 170 },
-  { id: "carPlate", label: "Original car plate", minWidth: 170 },
+  { id: "greenPlate", label: "Kenteken groenplat", minWidth: 170 },
+  { id: "carPlate", label: "Kenteken auto", minWidth: 170 },
   {
     id: "startDate",
-    label: "Start date",
+    label: "Begin datum",
     minWidth: 170,
   },
   {
     id: "returnDate",
-    label: "Return Date",
+    label: "Retourdatum",
     minWidth: 170,
   },
   {
     id: "colName",
-    label: "Colleague",
+    label: "Medewerker",
     minWidth: 170,
   },
   {
     id: "options",
-    label: "Options",
+    label: "Opties",
     minWidth: 170,
   },
 ];
@@ -148,7 +148,7 @@ export default function ClientDrafts() {
   return (
     <div>
       <Box m={5}>
-        <h1>Colleague submissions</h1>
+        <h1>Medewerker submissions</h1>
       </Box>
       <Box display="flex" justifyContent="flex-end" mt={2}>
         <TextField
@@ -211,14 +211,10 @@ export default function ClientDrafts() {
                         <TableCell>{row.greenPlate}</TableCell>
                         <TableCell>{row.licensePlate}</TableCell>
                         <TableCell>
-                          {moment(row.startDate).format(
-                            "YYYY/MM/DD hh:mm:ss A"
-                          )}
+                          {moment(row.startDate).format("YYYY/MM/DD HH:mm:ss")}
                         </TableCell>
                         <TableCell>
-                          {moment(row.returnDate).format(
-                            "YYYY/MM/DD hh:mm:ss A"
-                          )}
+                          {moment(row.returnDate).format("YYYY/MM/DD HH:mm:ss")}
                         </TableCell>
                         <TableCell>{row.colName}</TableCell>
                         <TableCell>

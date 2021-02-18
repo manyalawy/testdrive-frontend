@@ -243,7 +243,7 @@ function ClientForm() {
   return (
     <div style={{ width: "100%" }}>
       <Box m={3}>
-        <h1>Client Form</h1>
+        <h1>Klanten Form</h1>
         <Box
           mt={10}
           ml={4}
@@ -252,7 +252,9 @@ function ClientForm() {
           flexDirection="column"
         >
           <FormControl className={classes.formControl}>
-            <InputLabel id="demo-simple-select-label">Green plate</InputLabel>
+            <InputLabel id="demo-simple-select-label">
+              Kenteken groenplat
+            </InputLabel>
             <Select
               style={{ width: 200 }}
               labelId="demo-simple-select-label"
@@ -276,7 +278,7 @@ function ClientForm() {
             <TextField
               value={carplate}
               style={{ width: 150, marginTop: 40 }}
-              label="Car plate"
+              label="Kenteken auto"
               onChange={(e) => {
                 setcarplate(e.target.value);
               }}
@@ -294,15 +296,15 @@ function ClientForm() {
               <h5>Car not found</h5>
             ) : (
               <div>
-                <h5>{"Brand:  " + plateCheck[0].merk}</h5>
-                <h5>{"Type:   " + plateCheck[0].handelsbenaming}</h5>
+                <h5>{"Merk:  " + plateCheck[0].merk}</h5>
+                <h5>{"Handelsbenaming:   " + plateCheck[0].handelsbenaming}</h5>
               </div>
             )}
           </Box>
           <Box mt={5}>
             <TextField
               id="datetime-local"
-              label="Start date"
+              label="Begin datum"
               type="datetime-local"
               className={classes.textField}
               InputLabelProps={{
@@ -315,7 +317,7 @@ function ClientForm() {
             />
           </Box>
           <Box mt={5}>
-            <InputLabel>Front image</InputLabel>
+            <InputLabel>Voorste afbeelding</InputLabel>
             <input
               accept=".jpg,.jpeg,.png"
               type="file"
@@ -327,7 +329,7 @@ function ClientForm() {
             ></input>
           </Box>
           <Box mt={5}>
-            <InputLabel>Back image</InputLabel>
+            <InputLabel>Terug afbeelding</InputLabel>
             <input
               accept=".jpg,.jpeg,.png"
               type="file"
@@ -341,7 +343,7 @@ function ClientForm() {
           <Box mt={5}>
             <TextField
               value={phone}
-              label="Phone number"
+              label="Telefoon"
               onChange={(e) => {
                 setphone(e.target.value);
               }}
@@ -350,7 +352,7 @@ function ClientForm() {
           <Box mt={5}>
             <TextField
               value={address}
-              label="Address"
+              label="Adres"
               onChange={(e) => {
                 setaddress(e.target.value);
               }}
@@ -362,7 +364,7 @@ function ClientForm() {
               onChange={(e) => {
                 setzipcode(e.target.value);
               }}
-              label="Postal code"
+              label="Postcode"
             ></TextField>
           </Box>
           <Box mt={5}>
@@ -371,13 +373,13 @@ function ClientForm() {
                 setdialog(true);
               }}
             >
-              Open Signature
+              Handtekening
             </Button>
           </Box>
           <Box mt={5}>
             <TextField
               id="datetime-local"
-              label="Return date"
+              label="Retourdatum"
               type="datetime-local"
               style={{ width: 200 }}
               className={classes.textField}
@@ -417,7 +419,7 @@ function ClientForm() {
         aria-labelledby="responsive-dialog-title"
       >
         <DialogContent>
-          <InputLabel>Signature</InputLabel>
+          <InputLabel>Handtekening</InputLabel>
           <div style={{ backgroundColor: "#f5f5f5", width: 300, height: 300 }}>
             <SignatureCanvas
               ref={signPad}

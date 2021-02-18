@@ -154,7 +154,7 @@ function ColleagueForm() {
   return (
     <div>
       <Box m={3}>
-        <h1>Colleague Form</h1>
+        <h1>Medewerker Form</h1>
         <Box
           mt={10}
           ml={4}
@@ -163,7 +163,9 @@ function ColleagueForm() {
           flexDirection="column"
         >
           <FormControl className={classes.formControl}>
-            <InputLabel id="demo-simple-select-label">Colleague</InputLabel>
+            <InputLabel id="demo-simple-select-label">
+              Kies medewerker
+            </InputLabel>
             <Select
               style={{ width: 200 }}
               labelId="demo-simple-select-label"
@@ -187,7 +189,9 @@ function ColleagueForm() {
           </FormControl>
           <Box mt={5}>
             <FormControl className={classes.formControl}>
-              <InputLabel id="demo-simple-select-label">Green plate</InputLabel>
+              <InputLabel id="demo-simple-select-label">
+                Kenteken groenplat
+              </InputLabel>
               <Select
                 style={{ width: 200 }}
                 labelId="demo-simple-select-label"
@@ -212,7 +216,7 @@ function ColleagueForm() {
             <TextField
               value={carplate}
               style={{ width: 150, marginTop: 40 }}
-              label="Car plate"
+              label="Kenteken auto"
               onChange={(e) => {
                 setcarplate(e.target.value);
               }}
@@ -230,15 +234,15 @@ function ColleagueForm() {
               <h5>Car not found</h5>
             ) : (
               <div>
-                <h5>{"Brand:  " + plateCheck[0].merk}</h5>
-                <h5>{"Type:   " + plateCheck[0].handelsbenaming}</h5>
+                <h5>{"Merk:  " + plateCheck[0].merk}</h5>
+                <h5>{"Handeksbenaming:   " + plateCheck[0].handelsbenaming}</h5>
               </div>
             )}
           </Box>
           <Box mt={5}>
             <TextField
               id="datetime-local"
-              label="Start date"
+              label="Begin datum"
               type="datetime-local"
               className={classes.textField}
               InputLabelProps={{
@@ -253,7 +257,7 @@ function ColleagueForm() {
           <Box mt={5}>
             <TextField
               id="datetime-local"
-              label="Return date"
+              label="Retourdatum"
               type="datetime-local"
               style={{ width: 200 }}
               className={classes.textField}

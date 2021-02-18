@@ -22,21 +22,21 @@ function Alert(props) {
 }
 
 const columns = [
-  { id: "greenPlate", label: "Green Plate", minWidth: 170 },
-  { id: "carPlate", label: "Original car plate", minWidth: 170 },
+  { id: "greenPlate", label: "Kenteken groenplat", minWidth: 170 },
+  { id: "carPlate", label: "Kenteken auto", minWidth: 170 },
   {
     id: "startDate",
-    label: "Start date",
+    label: "Begin datum",
     minWidth: 170,
   },
   {
     id: "colName",
-    label: "Colleague name",
+    label: "Medewerker",
     minWidth: 170,
   },
   {
     id: "options",
-    label: "Options",
+    label: "Opties",
     minWidth: 170,
   },
 ];
@@ -111,7 +111,7 @@ export default function ColleagueDrafts() {
   return (
     <div>
       <Box m={5}>
-        <h1>Colleague draft</h1>
+        <h1>Medewerker draft</h1>
       </Box>
       <Box mt={4}>
         <Paper className={classes.root}>
@@ -144,9 +144,7 @@ export default function ColleagueDrafts() {
                         <TableCell>{row.greenPlate}</TableCell>
                         <TableCell>{row.licensePlate}</TableCell>
                         <TableCell>
-                          {moment(row.startDate).format(
-                            "YYYY/MM/DD hh:mm:ss A"
-                          )}
+                          {moment(row.startDate).format("YYYY/MM/DD HH:mm:ss")}
                         </TableCell>
                         <TableCell>{row.colName}</TableCell>
                         <TableCell>

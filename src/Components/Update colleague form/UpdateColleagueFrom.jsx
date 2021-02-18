@@ -88,7 +88,7 @@ function UpdateColleagueForm() {
   return (
     <div>
       <Box m={3}>
-        <h1>Colleague Form</h1>
+        <h1>Medewerker Form</h1>
         <Box
           mt={10}
           ml={4}
@@ -112,7 +112,7 @@ function UpdateColleagueForm() {
           <Box mt={5}>
             <Typography variant="h5">
               {"Start date: " +
-                Moment(data.startDate).format("DD/MM/YYYY hh:mm:ss A")}
+                Moment(data.startDate).format("DD/MM/YYYY HH:mm:ss")}
             </Typography>
           </Box>
           <Box mt={5}>
