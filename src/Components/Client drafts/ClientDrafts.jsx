@@ -22,7 +22,7 @@ function Alert(props) {
 }
 
 const columns = [
-  { id: "greenPlate", label: "Kenteken groenplat", minWidth: 170 },
+  { id: "greenPlate", label: "Kenteken groeneplaat", minWidth: 170 },
   { id: "carPlate", label: "Kenteken auto", minWidth: 170 },
   {
     id: "startDate",

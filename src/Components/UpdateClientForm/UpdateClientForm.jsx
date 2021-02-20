@@ -97,7 +97,7 @@ function UpdateClientForm() {
           flexDirection="column"
         >
           <Typography variant="h5">
-            {"Kenteken groenplat: " + data.greenPlate}
+            {"Kenteken groeneplaat: " + data.greenPlate}
           </Typography>
           <Box mt={5}>
             <Typography variant="h5">
@@ -113,19 +113,21 @@ function UpdateClientForm() {
           </Box>
           <Box mt={5}>
             <Link target="_blank" href={data.frontImageURL}>
-              Voorste afbeelding
+              Voorkant rijbewijs
             </Link>
           </Box>
           <Box mt={5}>
             <Link target="_blank" href={data.backImageURL}>
-              Terug afbeelding
+              Achterkant rijbewijs
             </Link>
           </Box>
           <Box mt={5}>
             <Typography variant="h5">{"Telefoon: " + data.phone}</Typography>
           </Box>
           <Box mt={5}>
-            <Typography variant="h5">{"Adres: " + data.address}</Typography>
+            <Typography variant="h5">
+              {"Huisnummer: " + data.address}
+            </Typography>
           </Box>
           <Box mt={5}>
             <Typography variant="h5">

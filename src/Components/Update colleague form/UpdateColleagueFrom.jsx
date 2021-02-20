@@ -97,28 +97,28 @@ function UpdateColleagueForm() {
           flexDirection="column"
         >
           <Typography variant="h5">
-            {"Green plate: " + data.greenPlate}
+            {"Kenteken groeneplaat: " + data.greenPlate}
           </Typography>
           <Box mt={5}>
             <Typography variant="h5">
-              {"Car license: " + data.licensePlate}
+              {"Kenteken auto: " + data.licensePlate}
             </Typography>
           </Box>
           <Box mt={5}>
             <Typography variant="h5">
-              {"Car license: " + data.colName}
+              {"Medewerker: " + data.colName}
             </Typography>
           </Box>
           <Box mt={5}>
             <Typography variant="h5">
-              {"Start date: " +
+              {"Begin datum: " +
                 Moment(data.startDate).format("DD/MM/YYYY HH:mm:ss")}
             </Typography>
           </Box>
           <Box mt={5}>
             <TextField
               id="datetime-local"
-              label="Return date"
+              label="Retourdatum"
               type="datetime-local"
               style={{ width: 200 }}
               className={classes.textField}

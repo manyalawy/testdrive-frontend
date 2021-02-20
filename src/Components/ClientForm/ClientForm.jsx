@@ -253,7 +253,7 @@ function ClientForm() {
         >
           <FormControl className={classes.formControl}>
             <InputLabel id="demo-simple-select-label">
-              Kenteken groenplat
+              Kenteken groeneplaat
             </InputLabel>
             <Select
               style={{ width: 200 }}
@@ -317,7 +317,7 @@ function ClientForm() {
             />
           </Box>
           <Box mt={5}>
-            <InputLabel>Voorste afbeelding</InputLabel>
+            <InputLabel>Voorkant rijbewijs</InputLabel>
             <input
               accept=".jpg,.jpeg,.png"
               type="file"
@@ -329,7 +329,7 @@ function ClientForm() {
             ></input>
           </Box>
           <Box mt={5}>
-            <InputLabel>Terug afbeelding</InputLabel>
+            <InputLabel> Achterkant rijbewijs</InputLabel>
             <input
               accept=".jpg,.jpeg,.png"
               type="file"
@@ -352,7 +352,7 @@ function ClientForm() {
           <Box mt={5}>
             <TextField
               value={address}
-              label="Adres"
+              label="Huisnummer"
               onChange={(e) => {
                 setaddress(e.target.value);
               }}

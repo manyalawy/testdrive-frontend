@@ -190,7 +190,7 @@ function ColleagueForm() {
           <Box mt={5}>
             <FormControl className={classes.formControl}>
               <InputLabel id="demo-simple-select-label">
-                Kenteken groenplat
+                Kenteken groeneplaat
               </InputLabel>
               <Select
                 style={{ width: 200 }}

@@ -72,7 +72,7 @@ function ViewClientForm() {
           flexDirection="column"
         >
           <Typography variant="h5">
-            {"Kenteken groenplat: " + data.greenPlate}
+            {"Kenteken groeneplaat: " + data.greenPlate}
           </Typography>
           <Box mt={5}>
             <Typography variant="h5">
@@ -91,7 +91,7 @@ function ViewClientForm() {
               <img style={{ width: 300 }} src={data.frontImageURL} />
             ) : (
               <Link target="_blank" href={data.frontImageURL}>
-                Voorste afbeelding
+                Voorkant rijbewijs
               </Link>
             )}
           </Box>
@@ -100,7 +100,7 @@ function ViewClientForm() {
               <img style={{ width: 300 }} src={data.backImageURL} />
             ) : (
               <Link target="_blank" href={data.backImageURL}>
-                Terug afbeelding
+                Achterkant rijbewijs
               </Link>
             )}
           </Box>
@@ -108,7 +108,9 @@ function ViewClientForm() {
             <Typography variant="h5">{"Telefoon: " + data.phone}</Typography>
           </Box>
           <Box mt={5}>
-            <Typography variant="h5">{"Adres: " + data.address}</Typography>
+            <Typography variant="h5">
+              {"Huisnummer: " + data.address}
+            </Typography>
           </Box>
           <Box mt={5}>
             <Typography variant="h5">

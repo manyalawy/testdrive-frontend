@@ -27,7 +27,7 @@ function Alert(props) {
 const columns = [
   {
     id: "greenPlate",
-    label: "Kenteken groenplat",
+    label: "Kenteken groeneplaat",
     minWidth: 170,
   },
   {
@@ -150,7 +150,7 @@ export default function GreenPlates() {
           variant="contained"
           color="primary"
         >
-          Kenteken groenplat toevoegen
+          Kenteken groeneplaat toevoegen
         </Button>
       </Box>
       <Box mt={5} mb={10} display="flex" justifyContent="center">

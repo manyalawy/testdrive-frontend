@@ -1,15 +1,17 @@
 import { Nav, Navbar, NavDropdown, Button } from "react-bootstrap";
 import React from "react";
 import { useHistory } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 
 function NavigationBar() {
   const history = useHistory();
+  const isBigScreen = useMediaQuery({ query: "(min-device-width: 700px)" });
   const handleLogout = () => {
     localStorage.removeItem("user");
     history.push("/login");
   };
   return (
-    <div style={{ fontSize: 30, marginRight: -90 }}>
+    <div style={{ fontSize: 30, marginRight: isBigScreen ? 0 : -55 }}>
       <Navbar bg="dark" variant="dark" expand="lg">
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
