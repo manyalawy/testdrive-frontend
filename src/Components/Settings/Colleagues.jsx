@@ -74,6 +74,7 @@ export default function Colleagues() {
   const [backdrop, setbackdrop] = useState(false);
   const [dialog, setdialog] = useState(false);
   const [name, setname] = useState("");
+  const [password, setPassword] = useState("");
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -86,7 +87,11 @@ export default function Colleagues() {
   const handleAdd = () => {
     setdialog(false);
     axios
-      .post("/collegue", { name: name }, { headers: { token: token } })
+      .post(
+        "/collegue",
+        { username: name, password: password },
+        { headers: { token: token } }
+      )
       .then((res) => {
         setname("");
         if (res.data.success) {
@@ -177,7 +182,7 @@ export default function Colleagues() {
                         role="checkbox"
                         tabIndex={-1}
                       >
-                        <TableCell>{row.name}</TableCell>
+                        <TableCell>{row.username}</TableCell>
                         <TableCell>
                           <Button
                             onClick={() => {
@@ -245,6 +250,18 @@ export default function Colleagues() {
             value={name}
             onChange={(e) => {
               setname(e.target.value);
+            }}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="password"
+            label="Password"
+            type="password"
+            fullWidth
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
             }}
           />
         </DialogContent>

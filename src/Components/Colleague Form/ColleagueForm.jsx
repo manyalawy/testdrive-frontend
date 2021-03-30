@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useHistory } from "react-router-dom";
 import { Box } from "@material-ui/core";
 import axios from "axios";
 import Snackbar from "@material-ui/core/Snackbar";
@@ -29,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ColleagueForm() {
+  const history = useHistory();
   const classes = useStyles();
   const token = localStorage.getItem("user");
   const [greenPlates, setgreenPlates] = useState([]);
@@ -56,7 +58,8 @@ function ColleagueForm() {
 
   const checkCarPlate = (e) => {
     const url =
-      "https://opendata.rdw.nl/resource/m9d7-ebf2.json?kenteken=" + carplate;
+      "https://opendata.rdw.nl/resource/m9d7-ebf2.json?kenteken=" +
+      carplate.toUpperCase();
     if (carplate == "") {
       setopen(true);
       seterror(true);
@@ -88,6 +91,7 @@ function ColleagueForm() {
           setopen(true);
           seterror(false);
           setmessage("Form saved to drafts");
+          history.push("/");
         }
       })
       .catch((error) => {
@@ -117,6 +121,7 @@ function ColleagueForm() {
           setopen(true);
           seterror(false);
           setmessage("Form submitted");
+          history.push("/");
         }
       })
       .catch((error) => {
@@ -180,8 +185,8 @@ function ColleagueForm() {
               </MenuItem>
               {colleague.map((col) => {
                 return (
-                  <MenuItem key={col._id} value={col.name}>
-                    {col.name}
+                  <MenuItem key={col._id} value={col.username}>
+                    {col.username}
                   </MenuItem>
                 );
               })}
@@ -273,7 +278,7 @@ function ColleagueForm() {
         </Box>
         <Box mt={5} display="flex" justifyContent="flex-end">
           <Button color="primary" onClick={saveAsDraft}>
-            Save as draft
+            Bewaar als concept
           </Button>
           <Button color="primary" onClick={submit}>
             Submit

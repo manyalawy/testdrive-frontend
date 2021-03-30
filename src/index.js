@@ -14,6 +14,7 @@ import UpdateClientForm from "./Components/UpdateClientForm/UpdateClientForm";
 import ViewClientForm from "./Components/View Client Form/ViewClientForm";
 import UpdateColleagueForm from "./Components/Update colleague form/UpdateColleagueFrom";
 import Login from "./Components/Login/Login";
+import Home from "./Components/Home/Home";
 import ProtectedRoute from "./Sevices/ProtectedRoute";
 import axios from "axios";
 
@@ -23,6 +24,7 @@ ReactDOM.render(
   <>
     <Router>
       <ProtectedRoute component={Navbar} />
+      <ProtectedRoute component={Home} path="/" exact />
       <Route path="/login" component={Login} />
       <ProtectedRoute
         path="/client/form/update/:id"

@@ -1,8 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useHistory } from "react-router-dom";
 import { Box } from "@material-ui/core";
 import axios from "axios";
 import Snackbar from "@material-ui/core/Snackbar";
-import { Button, Backdrop, CircularProgress } from "@material-ui/core";
+import {
+  Button,
+  Backdrop,
+  CircularProgress,
+  FormControlLabel,
+  Checkbox,
+} from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -17,7 +24,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
-
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -36,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ClientForm() {
+  const history = useHistory();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const classes = useStyles();
@@ -52,6 +60,7 @@ function ClientForm() {
     Moment().format("yyyy-MM-DDTHH:mm")
   );
   const [frontimage, setfrontimage] = useState("");
+  const [checked, setchecked] = useState(false);
   const [backimage, setbackimage] = useState("");
   const [phone, setphone] = useState("");
   const [address, setaddress] = useState("");
@@ -75,7 +84,8 @@ function ClientForm() {
 
   const checkCarPlate = (e) => {
     const url =
-      "https://opendata.rdw.nl/resource/m9d7-ebf2.json?kenteken=" + carplate;
+      "https://opendata.rdw.nl/resource/m9d7-ebf2.json?kenteken=" +
+      carplate.toUpperCase();
     if (carplate == "") {
       setopen(true);
       seterror(true);
@@ -148,6 +158,7 @@ function ClientForm() {
           setopen(true);
           seterror(false);
           setmessage("Form saved to drafts");
+          history.push("/");
         }
       })
       .catch((error) => {
@@ -217,6 +228,7 @@ function ClientForm() {
           setopen(true);
           seterror(false);
           setmessage("Form saved to drafts");
+          history.push("/");
         }
       })
       .catch((error) => {
@@ -319,6 +331,7 @@ function ClientForm() {
           <Box mt={5}>
             <InputLabel>Voorkant rijbewijs</InputLabel>
             <input
+              capture="camera"
               accept=".jpg,.jpeg,.png"
               type="file"
               id="front"
@@ -331,6 +344,7 @@ function ClientForm() {
           <Box mt={5}>
             <InputLabel> Achterkant rijbewijs</InputLabel>
             <input
+              capture="camera"
               accept=".jpg,.jpeg,.png"
               type="file"
               id="back"
@@ -375,7 +389,21 @@ function ClientForm() {
             >
               Handtekening
             </Button>
+            {signature == "" ? null : <CheckCircleIcon />}
           </Box>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={checked}
+                onChange={() => {
+                  setchecked(!checked);
+                }}
+                name="primary"
+                color="primary"
+              />
+            }
+            label="U gaat akkoord met de algemene voorwaarden van AutoXL"
+          />
           <Box mt={5}>
             <TextField
               id="datetime-local"
@@ -395,7 +423,7 @@ function ClientForm() {
         </Box>
         <Box mt={5} display="flex" justifyContent="flex-end">
           <Button color="primary" onClick={saveAsDraft}>
-            Save as draft
+            Bewaar als concept
           </Button>
           <Button color="primary" onClick={submit}>
             Submit
