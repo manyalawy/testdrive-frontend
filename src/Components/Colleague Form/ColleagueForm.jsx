@@ -277,10 +277,10 @@ function ColleagueForm() {
           </Box>
         </Box>
         <Box mt={5} display="flex" justifyContent="flex-end">
-          <Button color="primary" onClick={saveAsDraft}>
+          <Button color="primary" onClick={saveAsDraft} variant="outlined">
             Bewaar als concept
           </Button>
-          <Button color="primary" onClick={submit}>
+          <Button color="primary" onClick={submit} variant="outlined">
             Submit
           </Button>
         </Box>

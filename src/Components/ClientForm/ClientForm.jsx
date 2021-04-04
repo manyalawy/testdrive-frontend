@@ -386,6 +386,7 @@ function ClientForm() {
               onClick={() => {
                 setdialog(true);
               }}
+              variant="outlined"
             >
               Handtekening
             </Button>
@@ -422,10 +423,10 @@ function ClientForm() {
           </Box>
         </Box>
         <Box mt={5} display="flex" justifyContent="flex-end">
-          <Button color="primary" onClick={saveAsDraft}>
+          <Button color="primary" onClick={saveAsDraft} variant="outlined">
             Bewaar als concept
           </Button>
-          <Button color="primary" onClick={submit}>
+          <Button color="primary" onClick={submit} variant="outlined">
             Submit
           </Button>
         </Box>
@@ -461,8 +462,13 @@ function ClientForm() {
           </div>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={clearSig} color="primary">
-            Clear
+          <Button
+            autoFocus
+            onClick={clearSig}
+            color="primary"
+            variant="outlined"
+          >
+            Wissen
           </Button>
           <Button
             onClick={() => {
@@ -475,8 +481,9 @@ function ClientForm() {
             }}
             color="primary"
             autoFocus
+            variant="outlined"
           >
-            Save
+            Opslaan
           </Button>
         </DialogActions>
       </Dialog>

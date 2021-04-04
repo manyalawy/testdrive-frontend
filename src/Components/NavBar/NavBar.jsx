@@ -5,6 +5,7 @@ import { useMediaQuery } from "react-responsive";
 import { Badge } from "@material-ui/core";
 import MailIcon from "@material-ui/icons/ListAlt";
 import axios from "axios";
+import logo from "./xlproef.png";
 
 function NavigationBar() {
   const history = useHistory();
@@ -15,6 +16,7 @@ function NavigationBar() {
     localStorage.removeItem("user");
     history.push("/login");
   };
+  const [pressed, setpressed] = useState(false);
   useEffect(async () => {
     const clientDrafts = await axios.get("/client/draft", {
       headers: { token: token },
@@ -33,14 +35,21 @@ function NavigationBar() {
   }, []);
 
   return (
-    <div style={{ fontSize: 30, marginRight: isBigScreen ? 0 : -55 }}>
+    <div style={{ fontSize: 30, marginRight: isBigScreen ? 0 : -36 }}>
       <Navbar bg="dark" variant="dark" expand="lg">
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar.Brand href="/">
+          <img style={{ width: "70%" }} src={logo} />
+        </Navbar.Brand>
+        <Navbar.Toggle
+          aria-controls="basic-navbar-nav"
+          onClick={() => {
+            setpressed(!pressed);
+          }}
+        />
+        <Navbar.Collapse id="basic-navbar-nav" className="navbar-left">
           <Nav className="mr-auto">
             <NavDropdown title="Klanten" id="basic-nav-dropdown">
               <NavDropdown.Item href="/client/form">Add form</NavDropdown.Item>
-
               <NavDropdown.Item href="/client/draft">Draft</NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="Medewerker" id="basic-nav-dropdown">
@@ -65,7 +74,11 @@ function NavigationBar() {
         <Nav>
           <Badge
             color="secondary"
-            style={{ marginRight: "50px", color: "white" }}
+            style={{
+              marginRight: "50px",
+              color: "white",
+              display: pressed ? "none" : "block",
+            }}
             variant="dot"
             invisible={invisible}
           >

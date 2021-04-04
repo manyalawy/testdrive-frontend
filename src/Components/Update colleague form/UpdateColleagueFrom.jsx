@@ -133,7 +133,7 @@ function UpdateColleagueForm() {
           </Box>
         </Box>
         <Box mt={5} display="flex" justifyContent="flex-end">
-          <Button color="primary" onClick={submit}>
+          <Button color="primary" onClick={submit} variant="outlined">
             Submit
           </Button>
         </Box>
