@@ -35,11 +35,8 @@ function NavigationBar() {
   }, []);
 
   return (
-    <div style={{ fontSize: 30, marginRight: isBigScreen ? 0 : -36 }}>
+    <div style={{ fontSize: 20, marginRight: isBigScreen ? 0 : -36 }}>
       <Navbar bg="dark" variant="dark" expand="lg">
-        <Navbar.Brand href="/">
-          <img style={{ width: "70%" }} src={logo} />
-        </Navbar.Brand>
         <Navbar.Toggle
           aria-controls="basic-navbar-nav"
           onClick={() => {
@@ -48,6 +45,7 @@ function NavigationBar() {
         />
         <Navbar.Collapse id="basic-navbar-nav" className="navbar-left">
           <Nav className="mr-auto">
+            <Nav.Link href="/">Home pagina</Nav.Link>
             <NavDropdown title="Klanten" id="basic-nav-dropdown">
               <NavDropdown.Item href="/client/form">Add form</NavDropdown.Item>
               <NavDropdown.Item href="/client/draft">Draft</NavDropdown.Item>
