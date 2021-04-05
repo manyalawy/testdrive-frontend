@@ -37,38 +37,10 @@ function NavigationBar() {
   return (
     <div style={{ fontSize: 20, marginRight: isBigScreen ? 0 : -36 }}>
       <Navbar bg="dark" variant="dark" expand="lg">
-        <Navbar.Toggle
-          aria-controls="basic-navbar-nav"
-          onClick={() => {
-            setpressed(!pressed);
-          }}
-        />
-        <Navbar.Collapse id="basic-navbar-nav" className="navbar-left">
-          <Nav className="mr-auto">
-            <Nav.Link href="/">Home pagina</Nav.Link>
-            <NavDropdown title="Klanten" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/client/form">Add form</NavDropdown.Item>
-              <NavDropdown.Item href="/client/draft">Draft</NavDropdown.Item>
-            </NavDropdown>
-            <NavDropdown title="Medewerker" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/colleague/form">
-                Add form
-              </NavDropdown.Item>
+        <Nav className="mr-auto">
+          <Nav.Link href="/">Home pagina</Nav.Link>
+        </Nav>
 
-              <NavDropdown.Item href="/colleague/draft">Draft</NavDropdown.Item>
-            </NavDropdown>
-            <NavDropdown title="Instellingen" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/colleague/submission">
-                Colleage Submissions
-              </NavDropdown.Item>
-              <NavDropdown.Item href="/client/submission">
-                Client Submissions
-              </NavDropdown.Item>
-              <NavDropdown.Item href="/settings">Instellingen</NavDropdown.Item>
-              <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
-        </Navbar.Collapse>
         <Nav>
           <Badge
             color="secondary"
@@ -78,12 +50,11 @@ function NavigationBar() {
               display: pressed ? "none" : "block",
             }}
             variant="dot"
-            invisible={invisible}
           >
             <MailIcon />
           </Badge>
         </Nav>
-      </Navbar>{" "}
+      </Navbar>
     </div>
   );
 }
