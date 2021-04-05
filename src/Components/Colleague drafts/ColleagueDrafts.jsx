@@ -26,7 +26,7 @@ const columns = [
   { id: "carPlate", label: "Kenteken auto", minWidth: 170 },
   {
     id: "startDate",
-    label: "Begin datum",
+    label: "Moment dat de klant vertrekt",
     minWidth: 170,
   },
   {

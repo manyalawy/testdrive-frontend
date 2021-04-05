@@ -101,13 +101,13 @@ function UpdateClientForm() {
           </Typography>
           <Box mt={5}>
             <Typography variant="h5">
-              {"Kenteken auto: " + data.licensePlate}
+              {"Kenteken auto (geen streepjes ertussen): " + data.licensePlate}
             </Typography>
           </Box>
 
           <Box mt={5}>
             <Typography variant="h5">
-              {"Begin datum: " +
+              {"Moment dat de klant vertrekt: " +
                 Moment(data.startDate).format("DD/MM/YYYY HH:mm:ss")}
             </Typography>
           </Box>
@@ -141,7 +141,7 @@ function UpdateClientForm() {
           <Box mt={5}>
             <TextField
               id="datetime-local"
-              label="Retourdatum"
+              label="Moment dat de klant terug is"
               type="datetime-local"
               style={{ width: 200 }}
               className={classes.textField}

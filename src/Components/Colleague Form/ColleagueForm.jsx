@@ -221,7 +221,7 @@ function ColleagueForm() {
             <TextField
               value={carplate}
               style={{ width: 150, marginTop: 40 }}
-              label="Kenteken auto"
+              label="Kenteken auto (geen streepjes ertussen)"
               onChange={(e) => {
                 setcarplate(e.target.value);
               }}
@@ -247,7 +247,7 @@ function ColleagueForm() {
           <Box mt={5}>
             <TextField
               id="datetime-local"
-              label="Begin datum"
+              label="Moment dat de klant vertrekt"
               type="datetime-local"
               className={classes.textField}
               InputLabelProps={{
@@ -262,7 +262,7 @@ function ColleagueForm() {
           <Box mt={5}>
             <TextField
               id="datetime-local"
-              label="Retourdatum"
+              label="Moment dat de klant terug is"
               type="datetime-local"
               style={{ width: 200 }}
               className={classes.textField}

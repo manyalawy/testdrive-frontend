@@ -76,13 +76,13 @@ function ViewClientForm() {
           </Typography>
           <Box mt={5}>
             <Typography variant="h5">
-              {"Kenteken auto: " + data.licensePlate}
+              {"Kenteken auto (geen streepjes ertussen): " + data.licensePlate}
             </Typography>
           </Box>
 
           <Box mt={5}>
             <Typography variant="h5">
-              {"Begin datum: " +
+              {"Moment dat de klant vertrekt: " +
                 Moment(data.startDate).format("DD/MM/YYYY HH:mm:ss")}
             </Typography>
           </Box>
@@ -123,7 +123,7 @@ function ViewClientForm() {
           </Box>
           <Box mt={5}>
             <Typography variant="h5">
-              {"Return date: " +
+              {"Moment dat de klant terug is: " +
                 Moment(data.startDate).format("DD/MM/YYYY HH:mm:ss")}
             </Typography>
           </Box>

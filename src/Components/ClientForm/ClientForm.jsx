@@ -25,6 +25,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import ld from "lodash";
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -83,9 +84,11 @@ function ClientForm() {
   };
 
   const checkCarPlate = (e) => {
+    console.log();
     const url =
       "https://opendata.rdw.nl/resource/m9d7-ebf2.json?kenteken=" +
-      carplate.toUpperCase();
+      ld.replace(carplate, new RegExp("-", "g"), "").toUpperCase();
+
     if (carplate == "") {
       setopen(true);
       seterror(true);
@@ -290,7 +293,7 @@ function ClientForm() {
             <TextField
               value={carplate}
               style={{ width: 150, marginTop: 40 }}
-              label="Kenteken auto"
+              label="Kenteken auto (geen streepjes ertussen)"
               onChange={(e) => {
                 setcarplate(e.target.value);
               }}
@@ -316,7 +319,7 @@ function ClientForm() {
           <Box mt={5}>
             <TextField
               id="datetime-local"
-              label="Begin datum"
+              label="Moment dat de klant vertrekt"
               type="datetime-local"
               className={classes.textField}
               InputLabelProps={{
@@ -408,7 +411,7 @@ function ClientForm() {
           <Box mt={5}>
             <TextField
               id="datetime-local"
-              label="Retourdatum"
+              label="Moment dat de klant terug is"
               type="datetime-local"
               style={{ width: 200 }}
               className={classes.textField}
