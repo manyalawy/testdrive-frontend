@@ -22,6 +22,10 @@ export default function NestedList() {
   const classes = useStyles();
 
   const history = useHistory();
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    history.push("/login");
+  };
   return (
     <Box display="flex" justifyContent="center" mt={10}>
       <List
@@ -95,6 +99,10 @@ export default function NestedList() {
           }}
         >
           <ListItemText primary="Instellingen" />
+        </ListItem>
+        <Divider />
+        <ListItem button>
+          <ListItemText onClick={handleLogout} primary="Logout" />
         </ListItem>
       </List>
     </Box>

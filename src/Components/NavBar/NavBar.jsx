@@ -12,11 +12,6 @@ function NavigationBar() {
   const isBigScreen = useMediaQuery({ query: "(min-device-width: 700px)" });
   const [invisible, setinvisible] = useState(true);
   const token = localStorage.getItem("user");
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    history.push("/login");
-  };
-  const [pressed, setpressed] = useState(false);
   useEffect(async () => {
     const clientDrafts = await axios.get("/client/draft", {
       headers: { token: token },
@@ -36,7 +31,7 @@ function NavigationBar() {
 
   return (
     <div style={{ fontSize: 20, marginRight: isBigScreen ? 0 : -36 }}>
-      <Navbar bg="dark" variant="dark" expand="lg">
+      <Navbar bg="dark" variant="dark" expand="xs">
         <Nav className="mr-auto">
           <Nav.Link href="/">Home pagina</Nav.Link>
         </Nav>
@@ -47,9 +42,9 @@ function NavigationBar() {
             style={{
               marginRight: "50px",
               color: "white",
-              display: pressed ? "none" : "block",
             }}
             variant="dot"
+            invisible={invisible}
           >
             <MailIcon />
           </Badge>
