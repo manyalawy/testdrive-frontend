@@ -65,14 +65,27 @@ export default function NestedList() {
           <ListItemText primary="Klanten draft" />
         </ListItem>
         <Divider />
-        <ListItem
-          button
-          onClick={() => {
-            history.push("/colleague/form");
-          }}
-        >
-          <ListItemText primary="Medewerker form" />
-        </ListItem>
+        <Box mt={5}>
+          <ListItem
+            button
+            onClick={() => {
+              history.push("/settings");
+            }}
+          >
+            <ListItemText primary="Instellingen" />
+          </ListItem>
+        </Box>
+        <Divider />
+        <Box mt={5}>
+          <ListItem
+            button
+            onClick={() => {
+              history.push("/colleague/form");
+            }}
+          >
+            <ListItemText primary="Medewerker form" />
+          </ListItem>
+        </Box>
         <Divider />
         <ListItem
           button
@@ -92,18 +105,11 @@ export default function NestedList() {
           <ListItemText primary="Medewerker draft" />
         </ListItem>
         <Divider />
-        <ListItem
-          button
-          onClick={() => {
-            history.push("/settings");
-          }}
-        >
-          <ListItemText primary="Instellingen" />
-        </ListItem>
-        <Divider />
-        <ListItem button>
-          <ListItemText onClick={handleLogout} primary="Logout" />
-        </ListItem>
+        <Box mt={5}>
+          <ListItem button>
+            <ListItemText onClick={handleLogout} primary="Logout" />
+          </ListItem>
+        </Box>
       </List>
     </Box>
   );

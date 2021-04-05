@@ -6,6 +6,7 @@ import { Badge } from "@material-ui/core";
 import MailIcon from "@material-ui/icons/ListAlt";
 import axios from "axios";
 import logo from "./xlproef.png";
+import HomeIcon from "@material-ui/icons/Home";
 
 function NavigationBar() {
   const history = useHistory();
@@ -33,7 +34,9 @@ function NavigationBar() {
     <div style={{ fontSize: 20, marginRight: isBigScreen ? 0 : -36 }}>
       <Navbar bg="dark" variant="dark" expand="xs">
         <Nav className="mr-auto">
-          <Nav.Link href="/">Home pagina</Nav.Link>
+          <Nav.Link href="/">
+            <HomeIcon />
+          </Nav.Link>
         </Nav>
 
         <Nav>

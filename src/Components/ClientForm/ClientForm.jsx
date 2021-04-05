@@ -61,7 +61,7 @@ function ClientForm() {
     Moment().format("yyyy-MM-DDTHH:mm")
   );
   const [frontimage, setfrontimage] = useState("");
-  const [checked, setchecked] = useState(false);
+  const [checked, setchecked] = useState(true);
   const [backimage, setbackimage] = useState("");
   const [phone, setphone] = useState("");
   const [address, setaddress] = useState("");
@@ -258,7 +258,7 @@ function ClientForm() {
   return (
     <div style={{ width: "100%" }}>
       <Box m={3}>
-        <h1>Klanten Form</h1>
+        <h1>Proefrit formulier</h1>
         <Box
           mt={10}
           ml={4}
@@ -279,7 +279,7 @@ function ClientForm() {
                 setselectedGreenPlate(e.target.value);
               }}
             >
-              <MenuItem value="None">None</MenuItem>
+              <MenuItem value="None">Selecteer</MenuItem>
               {greenPlates.map((plate) => {
                 return (
                   <MenuItem key={plate._id} value={plate.number}>
@@ -293,7 +293,7 @@ function ClientForm() {
             <TextField
               value={carplate}
               style={{ width: 150, marginTop: 40 }}
-              label="Kenteken auto (geen streepjes ertussen)"
+              label="Kenteken Auto"
               onChange={(e) => {
                 setcarplate(e.target.value);
               }}
@@ -319,7 +319,7 @@ function ClientForm() {
           <Box mt={5}>
             <TextField
               id="datetime-local"
-              label="Moment dat de klant vertrekt"
+              label="Moment klant vertrek"
               type="datetime-local"
               className={classes.textField}
               InputLabelProps={{
@@ -368,15 +368,6 @@ function ClientForm() {
           </Box>
           <Box mt={5}>
             <TextField
-              value={address}
-              label="Huisnummer"
-              onChange={(e) => {
-                setaddress(e.target.value);
-              }}
-            ></TextField>
-          </Box>
-          <Box mt={5}>
-            <TextField
               value={zipcode}
               onChange={(e) => {
                 setzipcode(e.target.value);
@@ -384,6 +375,16 @@ function ClientForm() {
               label="Postcode"
             ></TextField>
           </Box>
+          <Box mt={5}>
+            <TextField
+              value={address}
+              label="Huisnummer"
+              onChange={(e) => {
+                setaddress(e.target.value);
+              }}
+            ></TextField>
+          </Box>
+
           <Box mt={5}>
             <Button
               onClick={() => {
@@ -395,23 +396,10 @@ function ClientForm() {
             </Button>
             {signature == "" ? null : <CheckCircleIcon />}
           </Box>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={checked}
-                onChange={() => {
-                  setchecked(!checked);
-                }}
-                name="primary"
-                color="primary"
-              />
-            }
-            label="U gaat akkoord met de algemene voorwaarden van AutoXL"
-          />
           <Box mt={5}>
             <TextField
               id="datetime-local"
-              label="Moment dat de klant terug is"
+              label="Tijd van terugkomst"
               type="datetime-local"
               style={{ width: 200 }}
               className={classes.textField}
@@ -426,7 +414,12 @@ function ClientForm() {
           </Box>
         </Box>
         <Box mt={5} display="flex" justifyContent="flex-end">
-          <Button color="primary" onClick={saveAsDraft} variant="outlined">
+          <Button
+            color="primary"
+            onClick={saveAsDraft}
+            variant="outlined"
+            style={{ marginRight: "15px" }}
+          >
             Bewaar als concept
           </Button>
           <Button color="primary" onClick={submit} variant="outlined">
@@ -463,6 +456,21 @@ function ClientForm() {
               }}
             />
           </div>
+          <Box mt={3}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={checked}
+                  onChange={() => {
+                    setchecked(!checked);
+                  }}
+                  name="primary"
+                  color="primary"
+                />
+              }
+              label="U gaat akkoord met de algemene voorwaarden van AutoXL"
+            />
+          </Box>
         </DialogContent>
         <DialogActions>
           <Button

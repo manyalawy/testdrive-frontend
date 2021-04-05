@@ -143,13 +143,13 @@ export default function ClientDrafts() {
   return (
     <div>
       <Box m={5}>
-        <h1>Klanten submissions</h1>
+        <h1>Afgewerkte proefritten</h1>
       </Box>
       <Box display="flex" justifyContent="flex-end" mt={2}>
         <TextField
           style={{ marginRight: 10 }}
           id="standard-basic"
-          label="Enter date"
+          label="Vul datum in"
           type="datetime-local"
           value={search}
           onChange={(e) => {
@@ -162,7 +162,7 @@ export default function ClientDrafts() {
           style={{ marginRight: 10, marginLeft: 10 }}
           onClick={handleSearch}
         >
-          Search
+          Zoek
         </Button>
         <Button
           style={{ backgroundColor: "red", color: "white" }}
@@ -172,7 +172,7 @@ export default function ClientDrafts() {
             setrows(allData);
           }}
         >
-          Reset
+          Wis
         </Button>
       </Box>
       <Box mt={4}>
