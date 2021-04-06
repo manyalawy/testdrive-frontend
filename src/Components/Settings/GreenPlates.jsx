@@ -140,7 +140,7 @@ export default function GreenPlates() {
   return (
     <div>
       <Box m={5}>
-        <h1>Kenteken groenplat</h1>
+        <h1>Kenteken groeneplaat</h1>
       </Box>
       <Box mt={5} mr={3} display="flex" justifyContent="flex-end">
         <Button
