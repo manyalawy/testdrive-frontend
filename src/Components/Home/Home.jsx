@@ -44,7 +44,7 @@ export default function NestedList() {
             history.push("/client/form");
           }}
         >
-          <ListItemText primary="Klanten form" />
+          <ListItemText primary="Proefrit formulier" />
         </ListItem>
         <Divider />
         <ListItem
@@ -53,7 +53,7 @@ export default function NestedList() {
             history.push("/client/submission");
           }}
         >
-          <ListItemText primary="Klanten submissions" />
+          <ListItemText primary="Afgewerkte proefritten" />
         </ListItem>
         <Divider />
         <ListItem
@@ -62,7 +62,7 @@ export default function NestedList() {
             history.push("/client/draft");
           }}
         >
-          <ListItemText primary="Klanten draft" />
+          <ListItemText primary="Proefrit drafts (datum terugkomst invullen)" />
         </ListItem>
         <Divider />
         <Box mt={5}>
@@ -83,7 +83,7 @@ export default function NestedList() {
               history.push("/colleague/form");
             }}
           >
-            <ListItemText primary="Medewerker form" />
+            <ListItemText primary="Medewerker formulier (auto mee naar huis)" />
           </ListItem>
         </Box>
         <Divider />
@@ -93,7 +93,7 @@ export default function NestedList() {
             history.push("/colleague/submission");
           }}
         >
-          <ListItemText primary="Medewerker submissions" />
+          <ListItemText primary="Afgewerkte formulieren medewerkers" />
         </ListItem>
         <Divider />
         <ListItem
@@ -102,7 +102,7 @@ export default function NestedList() {
             history.push("/colleague/draft");
           }}
         >
-          <ListItemText primary="Medewerker draft" />
+          <ListItemText primary="Medewerker drafts (datum terugkomst invullen)" />
         </ListItem>
         <Divider />
         <Box mt={5}>
