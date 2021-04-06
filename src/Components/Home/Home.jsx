@@ -53,7 +53,7 @@ export default function NestedList() {
             history.push("/client/submission");
           }}
         >
-          <ListItemText primary="Afgewerkte proefritten" />
+          <ListItemText primary="Afgewerkte formulieren proefritten" />
         </ListItem>
         <Divider />
         <ListItem
