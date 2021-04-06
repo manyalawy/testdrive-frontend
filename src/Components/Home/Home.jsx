@@ -50,20 +50,21 @@ export default function NestedList() {
         <ListItem
           button
           onClick={() => {
-            history.push("/client/submission");
-          }}
-        >
-          <ListItemText primary="Afgewerkte formulieren proefritten" />
-        </ListItem>
-        <Divider />
-        <ListItem
-          button
-          onClick={() => {
             history.push("/client/draft");
           }}
         >
           <ListItemText primary="Proefrit drafts (datum terugkomst invullen)" />
         </ListItem>
+        <Divider />
+        <ListItem
+          button
+          onClick={() => {
+            history.push("/client/submission");
+          }}
+        >
+          <ListItemText primary="Afgewerkte formulieren proefritten" />
+        </ListItem>
+
         <Divider />
         <Box mt={5}>
           <ListItem
@@ -90,20 +91,21 @@ export default function NestedList() {
         <ListItem
           button
           onClick={() => {
-            history.push("/colleague/submission");
-          }}
-        >
-          <ListItemText primary="Afgewerkte formulieren medewerkers" />
-        </ListItem>
-        <Divider />
-        <ListItem
-          button
-          onClick={() => {
             history.push("/colleague/draft");
           }}
         >
           <ListItemText primary="Medewerker drafts (datum terugkomst invullen)" />
         </ListItem>
+        <Divider />
+        <ListItem
+          button
+          onClick={() => {
+            history.push("/colleague/submission");
+          }}
+        >
+          <ListItemText primary="Afgewerkte formulieren medewerkers" />
+        </ListItem>
+
         <Divider />
         <Box mt={5}>
           <ListItem button>
