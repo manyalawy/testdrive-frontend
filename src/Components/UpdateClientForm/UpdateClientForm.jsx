@@ -88,7 +88,7 @@ function UpdateClientForm() {
   return (
     <div>
       <Box m={3}>
-        <h1>Klanten Form</h1>
+        <h1>Proefrit formulier</h1>
         <Box
           mt={10}
           ml={4}
@@ -157,7 +157,7 @@ function UpdateClientForm() {
         </Box>
         <Box mt={5} display="flex" justifyContent="flex-end">
           <Button color="primary" onClick={submit} variant="outlined">
-            Submit
+            Verstuur
           </Button>
         </Box>
       </Box>

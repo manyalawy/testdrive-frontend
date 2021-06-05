@@ -81,7 +81,7 @@ export default function ClientDrafts() {
   const [error, seterror] = useState(false);
   const [backdrop, setbackdrop] = useState(false);
   const [allData, setallData] = useState([]);
-  const [search, setSeaarch] = useState(moment().format("yyyy-MM-DDTHH:mm"));
+  const [search, setSeaarch] = useState(moment().format("yyyy-MM-DD"));
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -105,8 +105,8 @@ export default function ClientDrafts() {
           axios
             .get("/collegue/submission", { headers: { token: token } })
             .then((res) => {
-              setrows(res.data.forms);
-              setallData(res.data.forms);
+              setrows(res.data.forms.reverse());
+              setallData(res.data.forms.reverse());
             });
         }
       })
@@ -121,11 +121,15 @@ export default function ClientDrafts() {
   const handleSearch = () => {
     const newArr = [];
     allData.map((form) => {
-      const startDate = moment(form.startDate);
-      const returnDate = moment(form.returnDate);
+      const startDate = moment(form.startDate).format("yyyy-MM-DD");
+      const returnDate = moment(form.returnDate).format("yyyy-MM-DD");
       const searchDate = moment(search);
 
-      if (searchDate.isBetween(startDate, returnDate)) {
+      if (
+        searchDate.isBetween(startDate, returnDate) ||
+        searchDate.isSame(startDate) ||
+        searchDate.isSame(returnDate)
+      ) {
         newArr.push(form);
       }
       setrows(newArr);
@@ -136,8 +140,8 @@ export default function ClientDrafts() {
     axios
       .get("/collegue/submission", { headers: { token: token } })
       .then((res) => {
-        setrows(res.data.forms);
-        setallData(res.data.forms);
+        setrows(res.data.forms.reverse());
+        setallData(res.data.forms.reverse());
       })
       .catch((error) => {
         setopen(true);
@@ -148,17 +152,17 @@ export default function ClientDrafts() {
   return (
     <div>
       <Box m={5}>
-        <h1>Medewerker submissions</h1>
+        <h1>Afgesloten formulieren (medewerker)</h1>
       </Box>
       <Box display="flex" justifyContent="flex-end" mt={2}>
         <TextField
           style={{ marginRight: 10 }}
           id="standard-basic"
           label="Enter date"
-          type="datetime-local"
+          type="date"
           value={search}
           onChange={(e) => {
-            setSeaarch(moment(e.target.value).format("yyyy-MM-DDTHH:mm"));
+            setSeaarch(moment(e.target.value).format("yyyy-MM-DD"));
           }}
         />
         <Button

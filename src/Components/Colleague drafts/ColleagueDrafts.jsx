@@ -78,7 +78,6 @@ export default function ColleagueDrafts() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
   const handleDelete = (id) => {
     setbackdrop(true);
     axios
@@ -91,7 +90,7 @@ export default function ColleagueDrafts() {
           axios
             .get("/collegue/draft", { headers: { token: token } })
             .then((res) => {
-              setrows(res.data.forms);
+              setrows(res.data.forms.reverse());
             });
         }
       })
@@ -105,13 +104,13 @@ export default function ColleagueDrafts() {
 
   useEffect(() => {
     axios.get("/collegue/draft", { headers: { token: token } }).then((res) => {
-      setrows(res.data.forms);
+      setrows(res.data.forms.reverse());
     });
   }, []);
   return (
     <div>
       <Box m={5}>
-        <h1>Medewerker draft</h1>
+        <h1>Medewerker concepten</h1>
       </Box>
       <Box mt={4}>
         <Paper className={classes.root}>

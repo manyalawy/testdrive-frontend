@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#fff",
   },
 }));
-
+let allData = [];
 export default function ClientDrafts() {
   const token = localStorage.getItem("user");
   const classes = useStyles();
@@ -75,8 +75,7 @@ export default function ClientDrafts() {
   const [message, setmessage] = useState("");
   const [error, seterror] = useState(false);
   const [backdrop, setbackdrop] = useState(false);
-  const [allData, setallData] = useState([]);
-  const [search, setSeaarch] = useState(moment().format("yyyy-MM-DDTHH:mm"));
+  const [search, setSeaarch] = useState(moment().format("yyyy-MM-DD"));
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -100,8 +99,8 @@ export default function ClientDrafts() {
           axios
             .get("/client/submission", { headers: { token: token } })
             .then((res) => {
+              allData = res.data.forms.reverse();
               setrows(res.data.forms);
-              setallData(res.data.forms);
             });
         }
       })
@@ -116,11 +115,15 @@ export default function ClientDrafts() {
   const handleSearch = () => {
     const newArr = [];
     allData.map((form) => {
-      const startDate = moment(form.startDate);
-      const returnDate = moment(form.returnDate);
+      const startDate = moment(form.startDate).format("yyyy-MM-DD");
+      const returnDate = moment(form.returnDate).format("yyyy-MM-DD");
       const searchDate = moment(search);
 
-      if (searchDate.isBetween(startDate, returnDate)) {
+      if (
+        searchDate.isBetween(startDate, returnDate) ||
+        searchDate.isSame(startDate) ||
+        searchDate.isSame(returnDate)
+      ) {
         newArr.push(form);
       }
       setrows(newArr);
@@ -131,29 +134,30 @@ export default function ClientDrafts() {
     axios
       .get("/client/submission", { headers: { token: token } })
       .then((res) => {
+        allData = res.data.forms.reverse();
         setrows(res.data.forms);
-        setallData(res.data.forms);
       })
       .catch((error) => {
         setopen(true);
         seterror(true);
+        console.log(error);
         setmessage("Error: " + error.response.data.error);
       });
   }, []);
   return (
     <div>
       <Box m={5}>
-        <h1>Afgewerkte proefritten</h1>
+        <h1>Afgesloten formulieren</h1>
       </Box>
       <Box display="flex" justifyContent="flex-end" mt={2}>
         <TextField
           style={{ marginRight: 10 }}
           id="standard-basic"
           label="Vul datum in"
-          type="datetime-local"
+          type="date"
           value={search}
           onChange={(e) => {
-            setSeaarch(moment(e.target.value).format("yyyy-MM-DDTHH:mm"));
+            setSeaarch(moment(e.target.value).format("yyyy-MM-DD"));
           }}
         />
         <Button

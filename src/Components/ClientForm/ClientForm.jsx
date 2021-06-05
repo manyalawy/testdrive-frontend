@@ -423,7 +423,7 @@ function ClientForm() {
             Bewaar als concept
           </Button>
           <Button color="primary" onClick={submit} variant="outlined">
-            Submit
+            Verstuur
           </Button>
         </Box>
       </Box>

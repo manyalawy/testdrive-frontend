@@ -88,7 +88,7 @@ function UpdateColleagueForm() {
   return (
     <div>
       <Box m={3}>
-        <h1>Medewerker Form</h1>
+        <h1>Medewerker formulier</h1>
         <Box
           mt={10}
           ml={4}
@@ -134,7 +134,7 @@ function UpdateColleagueForm() {
         </Box>
         <Box mt={5} display="flex" justifyContent="flex-end">
           <Button color="primary" onClick={submit} variant="outlined">
-            Submit
+            Verstuur
           </Button>
         </Box>
       </Box>

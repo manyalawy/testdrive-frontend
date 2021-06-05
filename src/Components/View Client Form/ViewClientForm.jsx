@@ -63,7 +63,7 @@ function ViewClientForm() {
   return (
     <div>
       <Box m={3}>
-        <h1>Klanten Form</h1>
+        <h1>Proefrit formulier</h1>
         <Box
           mt={10}
           ml={4}
@@ -76,7 +76,7 @@ function ViewClientForm() {
           </Typography>
           <Box mt={5}>
             <Typography variant="h5">
-              {"Kenteken auto (geen streepjes ertussen): " + data.licensePlate}
+              {"Kenteken Auto: " + data.licensePlate}
             </Typography>
           </Box>
 

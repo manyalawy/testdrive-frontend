@@ -140,9 +140,9 @@ export default function Colleagues() {
   }, []);
   return (
     <div>
-      <Box m={5}>
-        <h1>Medewerker</h1>
-      </Box>
+      {/* <Box m={5}>
+        <h2>Medewerker</h2>
+      </Box> */}
       <Box mt={5} mr={3} display="flex" justifyContent="flex-end">
         <Button
           onClick={() => {

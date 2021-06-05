@@ -139,9 +139,9 @@ export default function GreenPlates() {
   }, []);
   return (
     <div>
-      <Box m={5}>
-        <h1>Kenteken groeneplaat</h1>
-      </Box>
+      {/* <Box m={5}>
+        <h2>Kenteken groeneplaat</h2>
+      </Box> */}
       <Box mt={5} mr={3} display="flex" justifyContent="flex-end">
         <Button
           onClick={() => {

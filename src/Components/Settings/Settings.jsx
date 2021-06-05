@@ -6,6 +6,9 @@ import GreenPlates from "./GreenPlates";
 export default function Settings() {
   return (
     <div>
+      <Box m={3}>
+        <h1>Instellingen</h1>
+      </Box>
       <Colleagues />
       <Box mt={5}>
         <GreenPlates />

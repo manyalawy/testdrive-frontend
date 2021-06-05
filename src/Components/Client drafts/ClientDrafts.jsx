@@ -91,7 +91,7 @@ export default function ClientDrafts() {
           axios
             .get("/client/draft", { headers: { token: token } })
             .then((res) => {
-              setrows(res.data.forms);
+              setrows(res.data.forms.reverse());
             });
         }
         setbackdrop(false);
@@ -107,7 +107,7 @@ export default function ClientDrafts() {
     axios
       .get("/client/draft", { headers: { token: token } })
       .then((res) => {
-        setrows(res.data.forms);
+        setrows(res.data.forms.reverse());
       })
       .catch((error) => {
         console.log(error);
@@ -119,7 +119,7 @@ export default function ClientDrafts() {
   return (
     <div>
       <Box m={5}>
-        <h1>Klanten draft</h1>
+        <h1>Proefrit concepten</h1>
       </Box>
       <Box mt={4}>
         <Paper className={classes.root}>

@@ -159,7 +159,7 @@ function ColleagueForm() {
   return (
     <div>
       <Box m={3}>
-        <h1>Medewerker Form</h1>
+        <h1>Medewerker formulier</h1>
         <Box
           mt={10}
           ml={4}
@@ -221,7 +221,7 @@ function ColleagueForm() {
             <TextField
               value={carplate}
               style={{ width: 150, marginTop: 40 }}
-              label="Kenteken auto (geen streepjes ertussen)"
+              label="Kenteken Auto"
               onChange={(e) => {
                 setcarplate(e.target.value);
               }}
@@ -277,11 +277,16 @@ function ColleagueForm() {
           </Box>
         </Box>
         <Box mt={5} display="flex" justifyContent="flex-end">
-          <Button color="primary" onClick={saveAsDraft} variant="outlined">
+          <Button
+            color="primary"
+            onClick={saveAsDraft}
+            variant="outlined"
+            style={{ marginRight: "15px" }}
+          >
             Bewaar als concept
           </Button>
           <Button color="primary" onClick={submit} variant="outlined">
-            Submit
+            Verstuur
           </Button>
         </Box>
       </Box>
