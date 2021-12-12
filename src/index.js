@@ -18,7 +18,7 @@ import Home from "./Components/Home/Home";
 import ProtectedRoute from "./Sevices/ProtectedRoute";
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:8080";
+axios.defaults.baseURL = "https://www.xlback.nl";
 
 ReactDOM.render(
   <>
