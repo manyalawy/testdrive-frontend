@@ -131,6 +131,9 @@ function UpdateColleagueForm() {
               }}
             />
           </Box>
+          <Box mt={5}>
+            <Typography variant="h5">{"Note: " + data.note}</Typography>
+          </Box>
         </Box>
         <Box mt={5} display="flex" justifyContent="flex-end">
           <Button color="primary" onClick={submit} variant="outlined">

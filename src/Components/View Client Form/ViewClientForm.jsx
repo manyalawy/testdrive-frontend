@@ -127,6 +127,9 @@ function ViewClientForm() {
                 Moment(data.startDate).format("DD/MM/YYYY HH:mm:ss")}
             </Typography>
           </Box>
+          <Box mt={5}>
+            <Typography variant="h5">{"Note: " + data.note}</Typography>
+          </Box>
         </Box>
       </Box>
       <div className={classes.root}>

@@ -48,6 +48,7 @@ function ColleagueForm() {
   const [loading, setloading] = useState(false);
   const [colleague, setcolleague] = useState([]);
   const [selectedcol, setselectedcol] = useState("");
+  const [note, setnote] = useState("");
 
   const handleClose = (event, reason) => {
     setopen(false);
@@ -78,6 +79,7 @@ function ColleagueForm() {
       startDate: startDate,
       status: "draft",
       colName: selectedcol,
+      note: note,
     };
     if (returnDate !== "") {
       data.returnDate = returnDate;
@@ -111,6 +113,7 @@ function ColleagueForm() {
       startDate: startDate,
       status: "submitted",
       submissionDate: Moment().format("yyyy-MM-DDTHH:mm"),
+      note: note,
     };
     setloading(true);
     axios
@@ -272,6 +275,16 @@ function ColleagueForm() {
               value={returnDate}
               onChange={(e) => {
                 setreturnDate(e.target.value);
+              }}
+            />
+          </Box>
+          <Box mt={5}>
+            <InputLabel>Note</InputLabel>
+            <textarea
+              rows={5}
+              value={note}
+              onChange={(e) => {
+                setnote(e.target.value);
               }}
             />
           </Box>

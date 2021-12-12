@@ -69,6 +69,7 @@ function ClientForm() {
   const [returnDate, setreturnDate] = useState("");
   const [loading, setloading] = useState(false);
   const [signature, setsignature] = useState("");
+  const [note, setnote] = useState("");
 
   let signPad = useRef({});
 
@@ -116,6 +117,7 @@ function ClientForm() {
       postal_code: zipcode,
       address: address,
       signature: signature,
+      note: note,
     };
     if (returnDate !== "") {
       data.returnDate = returnDate;
@@ -189,6 +191,7 @@ function ClientForm() {
       address: address,
       signature: signature,
       returnDate: returnDate,
+      note: note,
     };
 
     const front = new FormData();
@@ -249,6 +252,7 @@ function ClientForm() {
         setgreenPlates(res.data.plates);
       })
       .catch((error) => {
+        console.log(error);
         setopen(true);
         seterror(true);
         setmessage("Error: " + error.response.data.error);
@@ -409,6 +413,15 @@ function ClientForm() {
               value={returnDate}
               onChange={(e) => {
                 setreturnDate(e.target.value);
+              }}
+            />
+          </Box>
+          <Box mt={5}>
+            <InputLabel>Note</InputLabel>
+            <textarea
+              value={note}
+              onChange={(e) => {
+                setnote(e.target.value);
               }}
             />
           </Box>
